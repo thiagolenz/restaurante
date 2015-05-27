@@ -8,7 +8,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.sacarona.dao.UserDAO;
-import com.sacarona.model.User;
+import com.sacarona.model.user.User;
 
 @Repository
 public class UserDAOImpl extends AbstractDaoImpl <User> implements UserDAO {
@@ -55,8 +55,5 @@ public class UserDAOImpl extends AbstractDaoImpl <User> implements UserDAO {
 		user.setSocialMediaId(objectDestiny.getString("socialMediaId"));
 		user.setLang(objectDestiny.getString("lang"));
 		return user;
-	}
-
-
-	
+	}	
 }

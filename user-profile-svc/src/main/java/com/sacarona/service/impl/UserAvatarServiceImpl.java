@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sacarona.dao.UserAvatarDAO;
-import com.sacarona.model.UserAvatar;
+import com.sacarona.model.user.UserAvatar;
 import com.sacarona.service.UserAvatarService;
 
 @Service

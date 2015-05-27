@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.sacarona.common.context.RequestContext;
-import com.sacarona.model.User;
+import com.sacarona.model.user.User;
 
 /**
  * Class that translate messages according the language of User

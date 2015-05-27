@@ -1,7 +1,7 @@
 package com.sacarona.model.mobile;
 
 import com.sacarona.model.AbstractEntity;
-import com.sacarona.model.User;
+import com.sacarona.model.user.User;
 
 public class CellPhoneRegister extends AbstractEntity{
 	private Long id;

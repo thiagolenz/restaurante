@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.BulkWriteOperation;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
@@ -15,47 +16,54 @@ import com.sacarona.model.AbstractEntity;
 public abstract class AbstractDaoImpl <T extends AbstractEntity> implements GenericDAO <T>{
 	@Value("${mongodb.host}" )
 	protected String mongodbHost;
-	
+
 	@Value("${mongodb.port}" )
 	protected String mongoDbPort;
-	
+
 	@Value("${mongodb.database}" )
 	protected String database;
-	
+
+	private BulkWriteOperation builder;
+
+	private DB db;
+
 	@Override
 	public T insert(T obj) {
 		try {
-			DBCollection coll = getCollection();
 			BasicDBObject doc = new BasicDBObject();
 			Long id = getNextSequence(getSequenceName());
 			doc.append(SEQUENCE_VALUE, id);
 			obj.setId(id);
 			mapObject(obj, doc);
-			coll.insert(doc);
+			openBulk();
+			this.builder.insert(doc);
+			this.executeBulk();
 			return obj;
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
+
 	@Override
 	public void update (T obj, Long id) {
 		try {
-			DBCollection coll = getCollection();
 			BasicDBObject destiny = new BasicDBObject ();
-			
+			obj.setId(id);
+
 			mapObject(obj, destiny);
-			destiny.append(SEQUENCE_VALUE, id);
-			
+			destiny.append(""+ SEQUENCE_VALUE, id);
+
 			BasicDBObject query = new BasicDBObject();
 			query.append (SEQUENCE_VALUE, id);
-			coll.update(query, destiny);
+			
+			getCollection().update(query, destiny);
+
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public T findById(Class<T> clazz, Long id) {
 		try {
@@ -71,16 +79,16 @@ public abstract class AbstractDaoImpl <T extends AbstractEntity> implements Gene
 		}
 		return null;
 	}
-	
+
 	public Long getNextSequence (String sequenceName) throws UnknownHostException {
 		DBCollection coll = getDB().getCollection("sequences");
-		
+
 		BasicDBObject query = new BasicDBObject();
 		query.append("name", sequenceName);
-		
+
 		BasicDBObject updateObject = new BasicDBObject();
 		updateObject.append("$inc", new BasicDBObject(SEQUENCE_VALUE, 1));
-		
+
 		DBObject result = coll.findAndModify(query, updateObject);
 		if (result == null) {
 			BasicDBObject basic = new BasicDBObject ().append(SEQUENCE_VALUE, 0L);
@@ -90,7 +98,7 @@ public abstract class AbstractDaoImpl <T extends AbstractEntity> implements Gene
 		} 
 		return ((Number) result.get(SEQUENCE_VALUE)).longValue();
 	}
-	
+
 	@Override
 	public void remove(T obj) {
 		try {
@@ -103,22 +111,33 @@ public abstract class AbstractDaoImpl <T extends AbstractEntity> implements Gene
 			e.printStackTrace();
 		}
 	}
-	
+
 	protected DBCollection getCollection() throws UnknownHostException {
 		DB db  = getDB();
 		return db.getCollection(getCollectionName());
 	}
-	
+
 	protected DB getDB () throws UnknownHostException {
-		MongoClient mongoClient = new MongoClient( mongodbHost , Integer.valueOf(mongoDbPort) );
-		return mongoClient.getDB(database);
+		if (this.db == null) {
+			MongoClient mongoClient = new MongoClient( mongodbHost , Integer.valueOf(mongoDbPort) );
+			this.db = mongoClient.getDB(database);
+		}
+		return db;
 	}
-	
+
+	public void openBulk () throws UnknownHostException {
+		this.builder = getCollection().initializeOrderedBulkOperation();
+	}
+
+	public void executeBulk () throws UnknownHostException {
+		this.builder.execute();
+	}
+
 	protected abstract String getSequenceName ();
-	
+
 	protected abstract String getCollectionName ();
-	
-	protected abstract void mapObject (T object, BasicDBObject objectDestiny );
-	
+
+	protected abstract void mapObject (T object, BasicDBObject objectDestiny);
+
 	protected abstract T mapResult (BasicDBObject objectDestiny);
 }

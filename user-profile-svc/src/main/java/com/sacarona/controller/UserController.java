@@ -17,7 +17,7 @@ import com.sacarona.common.svc.controller.DefaultBeanValidator;
 import com.sacarona.common.svc.controller.ServiceRequestFactory;
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.exception.MandatoryFieldException;
-import com.sacarona.model.User;
+import com.sacarona.model.user.User;
 import com.sacarona.service.UserService;
 
 @Controller

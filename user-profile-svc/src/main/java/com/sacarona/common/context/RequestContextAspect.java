@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.google.common.base.Strings;
 import com.sacarona.common.Constants;
 import com.sacarona.common.svc.exception.BusinessException;
-import com.sacarona.model.User;
+import com.sacarona.model.user.User;
 import com.sacarona.service.UserService;
 
 /**

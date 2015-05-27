@@ -1,6 +1,6 @@
 package com.sacarona.common.context;
 
-import com.sacarona.model.User;
+import com.sacarona.model.user.User;
 
 /**
  * Class that contains the information of Request Context 

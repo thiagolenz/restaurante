@@ -1,4 +1,6 @@
-package com.sacarona.model;
+package com.sacarona.model.user;
+
+import com.sacarona.model.AbstractEntity;
 
 public class User extends AbstractEntity{
 	private Long id;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sacarona.common.context.RequestContext;
-import com.sacarona.model.UserAvatar;
+import com.sacarona.model.user.UserAvatar;
 import com.sacarona.service.UserAvatarService;
 
 @Controller

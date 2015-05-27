@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.dao.AppUserAuthDAO;
-import com.sacarona.model.User;
 import com.sacarona.model.mobile.AppUserAuth;
+import com.sacarona.model.user.User;
 import com.sacarona.service.AppUserAuthService;
 
 @Service

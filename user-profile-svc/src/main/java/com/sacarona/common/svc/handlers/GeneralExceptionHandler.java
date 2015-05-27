@@ -24,6 +24,7 @@ public class GeneralExceptionHandler {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public ErrorResponseBean defaultErrorHandler(HttpServletRequest req, RuntimeException e) throws Exception {
+		e.printStackTrace();
 		ErrorResponseBean errorBean = new ErrorResponseBean();
 		errorBean.setErrorCode("0");
 		if (e.getCause() instanceof RequestNotAuthorizedException)

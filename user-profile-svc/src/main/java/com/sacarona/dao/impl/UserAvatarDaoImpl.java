@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mongodb.BasicDBObject;
 import com.sacarona.dao.UserAvatarDAO;
-import com.sacarona.model.UserAvatar;
+import com.sacarona.model.user.UserAvatar;
 
 @Repository
 public class UserAvatarDaoImpl extends AbstractDaoImpl<UserAvatar> implements

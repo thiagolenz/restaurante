@@ -2,7 +2,7 @@ package com.sacarona.common.svc.io;
 
 import java.io.Serializable;
 
-import com.sacarona.model.User;
+import com.sacarona.model.user.User;
 
 /**
  * Encapsulate the request, records range, current page and entity filter

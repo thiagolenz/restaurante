@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sacarona.common.svc.controller.DefaultBeanValidator;
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.exception.MandatoryFieldException;
-import com.sacarona.model.User;
 import com.sacarona.model.mobile.AppUserAuth;
+import com.sacarona.model.user.User;
 import com.sacarona.service.AppUserAuthService;
 
 @Controller
