@@ -1,12 +1,15 @@
 package com.sacarona.dao.impl;
 
 import java.net.UnknownHostException;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.sacarona.common.svc.io.ServiceCollectionResponse;
+import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.ProvinceDAO;
 import com.sacarona.model.world.Province;
 
@@ -57,4 +60,13 @@ public class ProvinceDaoImpl extends AbstractDaoImpl<Province> implements Provin
 		return null;
 	}
 
+	@Override
+	public ServiceCollectionResponse<Province> search(ServiceRequest<Province> request) throws UnknownHostException {
+		BasicDBObject query = new BasicDBObject();
+		Province province = request.getEntity();
+		Pattern queryName = Pattern.compile("^" +province.getName());
+		query.append("name", queryName);
+		query.append("countryId", province.getCountryId());
+		return executeQueryPatination(request, query);
+	}
 }

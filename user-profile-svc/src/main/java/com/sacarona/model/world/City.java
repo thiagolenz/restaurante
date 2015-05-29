@@ -8,6 +8,7 @@ public class City extends AbstractEntity{
 	private String code;
 	private String countryIso;
 	private String provinceAbbreviation;
+	private String completeName;
 	
 	public Long getId() {
 		return id;
@@ -39,6 +40,15 @@ public class City extends AbstractEntity{
 	public void setProvinceAbbreviation(String provinceAbbreviation) {
 		this.provinceAbbreviation = provinceAbbreviation;
 	}
+	
+	public String getCompleteName() {
+		return completeName;
+	}
+	
+	public void setCompleteName(String completeName) {
+		this.completeName = completeName;
+	}
+	
 	@Override
 	public String toString() {
 		return "City [id=" + id + ", name=" + name + ", code=" + code

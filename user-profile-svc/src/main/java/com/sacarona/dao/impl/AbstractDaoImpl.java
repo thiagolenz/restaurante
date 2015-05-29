@@ -8,8 +8,11 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.BulkWriteOperation;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.sacarona.common.svc.io.ServiceCollectionResponse;
+import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.GenericDAO;
 import com.sacarona.model.AbstractEntity;
 
@@ -131,6 +134,18 @@ public abstract class AbstractDaoImpl <T extends AbstractEntity> implements Gene
 
 	public void executeBulk () throws UnknownHostException {
 		this.builder.execute();
+	}
+	
+	protected ServiceCollectionResponse<T> executeQueryPatination (ServiceRequest<T> request, BasicDBObject query) throws UnknownHostException {
+		DBCursor result = getCollection().find(query);
+		ServiceCollectionResponse<T> response = new ServiceCollectionResponse<>();
+		response.setTotalRecordsCount(result.count());
+		result = getCollection().find(query).skip(request.getOffset()).limit(request.getRecordsRange());
+		while (result.hasNext()) {
+			T item = mapResult((BasicDBObject) result.next());
+			response.getDataList().add(item);
+		}
+		return response;
 	}
 
 	protected abstract String getSequenceName ();

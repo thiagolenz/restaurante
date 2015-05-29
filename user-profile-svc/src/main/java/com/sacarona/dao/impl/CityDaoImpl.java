@@ -1,17 +1,26 @@
 package com.sacarona.dao.impl;
 
 import java.net.UnknownHostException;
+import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.sacarona.common.svc.io.ServiceCollectionResponse;
+import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.CityDAO;
+import com.sacarona.dao.CountryDAO;
 import com.sacarona.model.world.City;
+import com.sacarona.model.world.Country;
 
 @Repository
 public class CityDaoImpl extends AbstractDaoImpl<City> implements CityDAO {
+	
+	@Autowired
+	private CountryDAO countryDAO;
 
 	@Override
 	protected String getSequenceName() {
@@ -57,5 +66,21 @@ public class CityDaoImpl extends AbstractDaoImpl<City> implements CityDAO {
 			return city;
 		}
 		return null;
+	}
+
+	@Override
+	public ServiceCollectionResponse<City> search(ServiceRequest<City> request) throws UnknownHostException {
+		BasicDBObject query = new BasicDBObject();
+		City city = request.getEntity();
+		Pattern queryName = Pattern.compile("^" +city.getName());
+		query.put("name", queryName);
+		ServiceCollectionResponse<City> result = executeQueryPatination(request, query);
+		for (City cityTemp : result.getDataList()) {
+			cityTemp.setCompleteName(cityTemp.getName() + " "+ cityTemp.getProvinceAbbreviation());
+			Country country = countryDAO.findByIsoCode(cityTemp.getCountryIso());
+			if (country != null)
+				cityTemp.setCompleteName(cityTemp.getCompleteName() + ", " + country.getNameByLang(request.getUser().getLang()));
+		}
+		return result;
 	}
 }

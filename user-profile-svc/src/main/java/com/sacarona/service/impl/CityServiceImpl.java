@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sacarona.common.svc.exception.BusinessException;
+import com.sacarona.common.svc.io.ServiceCollectionResponse;
+import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.CityDAO;
 import com.sacarona.model.world.City;
 import com.sacarona.service.CityService;
@@ -29,6 +31,15 @@ public class CityServiceImpl implements CityService {
 				cityDAO.insert(city);
 			else 
 				cityDAO.update(city, existent.getId());
+		}
+	}
+
+	@Override
+	public ServiceCollectionResponse<City> search(ServiceRequest<City> request) throws BusinessException {
+		try {
+			return cityDAO.search(request);
+		} catch (UnknownHostException e) {
+			throw new BusinessException(e);
 		}
 	}
 }

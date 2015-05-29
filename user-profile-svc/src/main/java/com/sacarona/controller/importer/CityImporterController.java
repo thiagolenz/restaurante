@@ -25,6 +25,9 @@ public class CityImporterController {
 	
 	@Autowired
 	private CityService cityService;
+	
+	@Autowired
+	private CountryImporterController countryImporterController;
 
 	@RequestMapping(value="/import", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody 
@@ -52,7 +55,7 @@ public class CityImporterController {
 				city.setCountryIso(parts[1].trim().replaceAll("\"", ""));
 				city.setCode(parts[2].trim().replaceAll("\"", ""));
 				city.setName(parts[3].trim().replaceAll("\"", ""));
-				city.setProvinceAbbreviation(parts[7].trim().replaceAll("\"", ""));
+				city.setProvinceAbbreviation(parts[5].trim().replaceAll("\"", ""));
 				list.add(city);
 			}
 		}

@@ -56,6 +56,17 @@ public class Country extends AbstractEntity{
 		this.externalId = externalId;
 	}
 	
+	public String getNameByLang (String lang) {
+		if (lang == null)
+			lang = "en-US";
+		if (lang.equals("en-US"))
+			return nameEnglish;
+		else if (lang.equals("es"))
+			return nameSpanish;
+		else 
+			return namePortuguese;
+	}
+	
 	@Override
 	public String toString() {
 		return "Country [id=" + id + ", nameEnglish=" + nameEnglish

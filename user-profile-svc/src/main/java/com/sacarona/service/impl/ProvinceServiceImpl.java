@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sacarona.common.svc.exception.BusinessException;
+import com.sacarona.common.svc.io.ServiceCollectionResponse;
+import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.ProvinceDAO;
 import com.sacarona.model.world.Province;
 import com.sacarona.service.ProvinceService;
@@ -27,6 +29,15 @@ public class ProvinceServiceImpl implements ProvinceService {
 				else 
 					provinceDAO.update(province, existent.getId());
 			}
+		} catch (UnknownHostException e) {
+			throw new BusinessException(e);
+		}
+	}
+
+	@Override
+	public ServiceCollectionResponse<Province> search(ServiceRequest<Province> request) throws BusinessException {
+		try {
+			return provinceDAO.search(request);
 		} catch (UnknownHostException e) {
 			throw new BusinessException(e);
 		}
