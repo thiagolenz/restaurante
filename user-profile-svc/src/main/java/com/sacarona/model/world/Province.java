@@ -8,6 +8,14 @@ public class Province extends AbstractEntity {
 	private String abbreviation;
 	private Long countryId;
 	
+	public Province() {
+	}
+	
+	public Province(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

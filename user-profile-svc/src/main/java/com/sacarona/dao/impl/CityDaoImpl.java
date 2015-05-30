@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.CityDAO;
@@ -57,15 +55,7 @@ public class CityDaoImpl extends AbstractDaoImpl<City> implements CityDAO {
 		BasicDBObject query = new BasicDBObject();
 		query.append("countryIso", countryIso);
 		query.append("code", code);
-		DBCursor result = getCollection().find(query);
-		
-		if (result.hasNext()) {
-			DBObject next = result.next();
-			City city = mapResult((BasicDBObject) next);
-			result.close();
-			return city;
-		}
-		return null;
+		return singleQuery(query);
 	}
 
 	@Override

@@ -10,42 +10,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sacarona.common.context.RequestContext;
+import com.sacarona.common.response.Response;
 import com.sacarona.common.svc.exception.BusinessException;
-import com.sacarona.model.user.UserAvatar;
-import com.sacarona.service.UserAvatarService;
+import com.sacarona.model.user.UserProfile;
+import com.sacarona.service.UserProfileService;
+
 
 @Controller
-@RequestMapping(value="/userAvatar",produces=MediaType.APPLICATION_JSON_VALUE)
-public class UserAvatarController {
-	
+@RequestMapping(value="/userProfile",produces=MediaType.APPLICATION_JSON_VALUE)
+public class UserProfileController {
 	@Autowired
-	private UserAvatarService userAvatarService; 
+	private UserProfileService userProfileService;
 	private RequestContext requestContext;
-
+	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public UserAvatar getByUserId (@PathVariable("id") Long id) throws BusinessException {
-		UserAvatar userAvatar = userAvatarService.findByUserId (id);
-		if (userAvatar == null)
-			userAvatar = new UserAvatar();
-		return userAvatar;
+	public Object getByUserId (@PathVariable("id") Long id) throws BusinessException {
+		UserProfile userProfile = userProfileService.findByUserId (id);
+		if (userProfile == null)
+			return Response.notFoundResponse();
+		return userProfile;
 	}
 	
 	@RequestMapping(value="/", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public UserAvatar save(@RequestBody UserAvatar avatar) {
-		if (avatar.getUserId() == null)
-			avatar.setUserId(requestContext.getUser().getId());
-		userAvatarService.insert(avatar);
-		return avatar;
+	public UserProfile save(@RequestBody UserProfile profile) {
+		profile.setUserId(requestContext.getUser().getId());
+		userProfileService.insert(profile);
+		return profile;
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public UserAvatar update(@RequestBody UserAvatar avatar, @PathVariable("id") Long id) {
-		if (avatar.getUserId() == null)
-			avatar.setUserId(requestContext.getUser().getId());
-		userAvatarService.update(avatar, id);
-		return avatar;
+	public UserProfile update(@RequestBody UserProfile profile, @PathVariable("id") Long id) {
+		profile.setUserId(requestContext.getUser().getId());
+		userProfileService.update(profile, id);
+		return profile;
 	}
 }

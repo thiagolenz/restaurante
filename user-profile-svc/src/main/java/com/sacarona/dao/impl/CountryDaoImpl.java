@@ -54,15 +54,7 @@ public class CountryDaoImpl extends AbstractDaoImpl<Country> implements CountryD
 	public Country findByExternalId (Long id) throws UnknownHostException {
 		BasicDBObject query = new BasicDBObject();
 		query.append("externalId", id);
-		DBCursor result = getCollection().find(query);
-		
-		if (result.hasNext()) {
-			DBObject next = result.next();
-			Country country = mapResult((BasicDBObject) next);
-			result.close();
-			return country;
-		}
-		return null;
+		return singleQuery(query);
 	}
 	
 	@Override

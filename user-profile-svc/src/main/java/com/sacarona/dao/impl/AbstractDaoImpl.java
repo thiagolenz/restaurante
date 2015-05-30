@@ -147,6 +147,18 @@ public abstract class AbstractDaoImpl <T extends AbstractEntity> implements Gene
 		}
 		return response;
 	}
+	
+	protected T singleQuery (BasicDBObject query) throws UnknownHostException {
+		DBCursor result = getCollection().find(query);
+		
+		if (result.hasNext()) {
+			DBObject next = result.next();
+			T bean = mapResult((BasicDBObject) next);
+			result.close();
+			return bean;
+		}
+		return null;
+	}
 
 	protected abstract String getSequenceName ();
 

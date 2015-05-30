@@ -5,8 +5,6 @@ import java.net.UnknownHostException;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.sacarona.dao.UserDAO;
 import com.sacarona.model.user.User;
 
@@ -37,13 +35,7 @@ public class UserDAOImpl extends AbstractDaoImpl <User> implements UserDAO {
 		BasicDBObject query = new BasicDBObject();
 		query.append("socialMediaId", user.getSocialMediaId());
 		query.append("email", user.getEmail());
-		DBCursor result = getCollection().find(query);
-		
-		if (result.hasNext()) {
-			DBObject next = result.next();
-			return mapResult((BasicDBObject) next);
-		}
-		return null;
+		return singleQuery(query);
 	}
 
 	@Override

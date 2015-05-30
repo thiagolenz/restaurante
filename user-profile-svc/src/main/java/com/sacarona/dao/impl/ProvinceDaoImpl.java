@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.ProvinceDAO;
@@ -49,15 +47,7 @@ public class ProvinceDaoImpl extends AbstractDaoImpl<Province> implements Provin
 		BasicDBObject query = new BasicDBObject();
 		query.append("countryId", id);
 		query.append("abbreviation", abbreviation);
-		DBCursor result = getCollection().find(query);
-		
-		if (result.hasNext()) {
-			DBObject next = result.next();
-			Province province = mapResult((BasicDBObject) next);
-			result.close();
-			return province;
-		}
-		return null;
+		return singleQuery(query);
 	}
 
 	@Override

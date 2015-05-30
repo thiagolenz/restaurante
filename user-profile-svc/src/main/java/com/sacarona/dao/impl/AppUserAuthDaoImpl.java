@@ -5,8 +5,6 @@ import java.net.UnknownHostException;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.sacarona.dao.AppUserAuthDAO;
 import com.sacarona.model.mobile.AppUserAuth;
 
@@ -18,13 +16,7 @@ public class AppUserAuthDaoImpl extends AbstractDaoImpl<AppUserAuth> implements 
 		BasicDBObject query = new BasicDBObject();
 		query.append("appToken", userAuth.getAppToken());
 		query.append("userToken", userAuth.getUserToken());
-		DBCursor result = getCollection().find(query);
-		
-		if (result.hasNext()) {
-			DBObject next = result.next();
-			return mapResult((BasicDBObject) next);
-		}
-		return null;
+		return singleQuery(query);
 	}
 
 	protected String getSequenceName() {

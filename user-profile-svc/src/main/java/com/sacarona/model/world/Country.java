@@ -11,6 +11,15 @@ public class Country extends AbstractEntity{
 	private String un;
 	private Long externalId;
 	
+	public Country() {
+	
+	}
+	
+	public Country(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

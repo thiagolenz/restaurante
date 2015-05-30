@@ -10,6 +10,15 @@ public class City extends AbstractEntity{
 	private String provinceAbbreviation;
 	private String completeName;
 	
+	public City() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public City(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
