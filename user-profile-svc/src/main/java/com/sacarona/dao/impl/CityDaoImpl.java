@@ -64,7 +64,8 @@ public class CityDaoImpl extends AbstractDaoImpl<City> implements CityDAO {
 		City city = request.getEntity();
 		Pattern queryName = Pattern.compile("^" +city.getName());
 		query.put("name", queryName);
-		ServiceCollectionResponse<City> result = executeQueryPatination(request, query);
+		BasicDBObject orderBy = new BasicDBObject("name", 1);
+		ServiceCollectionResponse<City> result = executeQueryPatination(request, query, orderBy);
 		for (City cityTemp : result.getDataList()) {
 			cityTemp.setCompleteName(cityTemp.getName() + " "+ cityTemp.getProvinceAbbreviation());
 			Country country = countryDAO.findByIsoCode(cityTemp.getCountryIso());

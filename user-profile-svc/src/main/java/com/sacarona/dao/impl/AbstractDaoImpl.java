@@ -137,10 +137,18 @@ public abstract class AbstractDaoImpl <T extends AbstractEntity> implements Gene
 	}
 	
 	protected ServiceCollectionResponse<T> executeQueryPatination (ServiceRequest<T> request, BasicDBObject query) throws UnknownHostException {
+		return executeQueryPatination(request, query, null);
+	}
+	
+	protected ServiceCollectionResponse<T> executeQueryPatination (ServiceRequest<T> request, BasicDBObject query, BasicDBObject sort) throws UnknownHostException {
 		DBCursor result = getCollection().find(query);
+		if (sort != null)
+			result.sort(sort);
 		ServiceCollectionResponse<T> response = new ServiceCollectionResponse<>();
 		response.setTotalRecordsCount(result.count());
 		result = getCollection().find(query).skip(request.getOffset()).limit(request.getRecordsRange());
+		if (sort != null)
+			result.sort(sort);
 		while (result.hasNext()) {
 			T item = mapResult((BasicDBObject) result.next());
 			response.getDataList().add(item);
