@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
+import com.sacarona.controller.request.SearchTravelersRequest;
 import com.sacarona.dao.TravelDAO;
 import com.sacarona.model.travel.Travel;
 import com.sacarona.service.TravelService;
@@ -33,6 +34,15 @@ public class TravelServiceImpl implements TravelService {
 	public ServiceCollectionResponse<Travel> findByUser(ServiceRequest<Travel> request) throws BusinessException {
 		try {
 			return travelDAO.findByUser(request);
+		} catch (UnknownHostException e) {
+			throw new BusinessException(e);
+		}
+	}
+	
+	@Override
+	public ServiceCollectionResponse<Travel> findTravelers(SearchTravelersRequest request) throws BusinessException {
+		try {
+			return travelDAO.findTravelers(request);
 		} catch (UnknownHostException e) {
 			throw new BusinessException(e);
 		}

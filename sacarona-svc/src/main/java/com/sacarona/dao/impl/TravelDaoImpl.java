@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.mongodb.BasicDBObject;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
+import com.sacarona.controller.request.SearchLocationType;
+import com.sacarona.controller.request.SearchTravelersRequest;
 import com.sacarona.dao.CityDAO;
 import com.sacarona.dao.CountryDAO;
 import com.sacarona.dao.ProvinceDAO;
@@ -34,6 +36,45 @@ public class TravelDaoImpl extends AbstractDaoImpl<Travel> implements TravelDAO 
 			fillData(travel);
 		}
 		return response;
+	}
+	
+	@Override
+	public ServiceCollectionResponse<Travel> findTravelers(SearchTravelersRequest request) throws UnknownHostException {
+		BasicDBObject query = new BasicDBObject();
+		Travel entity = request.getRequest().getEntity();
+		
+		addCountryOriginWhereClause(query, entity);
+		addCityDestinyWhereClause(request, query, entity);
+		addProvinceDestinyWhereClause(request, query, entity);
+		
+		addCountryDestinyWhereClause(request, query, entity);
+
+		BasicDBObject orderBy = new BasicDBObject("departureDate", -1);
+		ServiceCollectionResponse<Travel> response = executeQueryPatination(request.getRequest(), query, orderBy);
+		for (Travel travel : response.getDataList()) {
+			fillData(travel);
+		}
+		return response;
+	}
+
+	private void addCountryOriginWhereClause(BasicDBObject query, Travel entity) {
+		if (entity.getCountryOrigin() != null)
+			query.append("countryOrigin_id", entity.getCountryOrigin().getId());
+	}
+
+	private void addCityDestinyWhereClause(SearchTravelersRequest request, BasicDBObject query, Travel entity) {
+		if (request.getLocationType() == SearchLocationType.CITY && entity.getCityDestiny() != null) 
+			query.append("cityDestiny_id", entity.getCityDestiny().getId());
+	}
+	
+	private void addProvinceDestinyWhereClause(SearchTravelersRequest request,BasicDBObject query, Travel entity) {
+		if (request.getLocationType() == SearchLocationType.PROVINCE && entity.getProvinceDestiny() != null)
+			query.append("provinceDestiny_id", entity.getProvinceDestiny().getId());
+	}
+
+	private void addCountryDestinyWhereClause(SearchTravelersRequest request, BasicDBObject query, Travel entity) {
+		if (request.getLocationType() == SearchLocationType.COUNTRY && entity.getCountryDestiny() != null)
+			query.append("countryDestiny_id", entity.getCountryDestiny().getId());
 	}
 
 	@Override
