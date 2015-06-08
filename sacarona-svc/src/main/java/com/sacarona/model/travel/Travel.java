@@ -1,5 +1,6 @@
 package com.sacarona.model.travel;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.sacarona.model.AbstractEntity;
@@ -111,4 +112,12 @@ public class Travel extends AbstractEntity {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	
+	private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+	
+	@Override
+	public String toString() {
+		return "id = "+id + " - departureDAte " +format.format(departureDate);
+	}
+	
 }

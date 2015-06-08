@@ -1,6 +1,7 @@
 package com.sacarona.dao.impl;
 
 import java.net.UnknownHostException;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,6 +49,8 @@ public class TravelDaoImpl extends AbstractDaoImpl<Travel> implements TravelDAO 
 		addProvinceDestinyWhereClause(request, query, entity);
 		
 		addCountryDestinyWhereClause(request, query, entity);
+		query.append("canceled", false);
+		query.append("departureDate", new BasicDBObject("$gte", new Date()));
 
 		BasicDBObject orderBy = new BasicDBObject("departureDate", -1);
 		ServiceCollectionResponse<Travel> response = executeQueryPatination(request.getRequest(), query, orderBy);
