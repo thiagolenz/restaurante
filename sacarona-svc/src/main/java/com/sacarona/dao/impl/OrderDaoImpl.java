@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.mongodb.BasicDBObject;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
+import com.sacarona.controller.request.SearchLocationType;
+import com.sacarona.controller.request.SearchOrdersRequest;
 import com.sacarona.dao.CityDAO;
 import com.sacarona.dao.CountryDAO;
 import com.sacarona.dao.OrderDAO;
@@ -35,6 +37,45 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		}
 		return response;
 	}
+	
+	@Override
+	public ServiceCollectionResponse<Order> findOrders(SearchOrdersRequest request) throws UnknownHostException {
+		BasicDBObject query = new BasicDBObject();
+		Order entity = request.getRequest().getEntity();
+		
+		addCountryOriginWhereClause(query, entity);
+		
+		addCityDestinyWhereClause(request, query, entity);
+		addProvinceDestinyWhereClause(request, query, entity);
+		addCountryDestinyWhereClause(request, query, entity);
+
+		ServiceCollectionResponse<Order> response = executeQueryPatination(request.getRequest(), query);
+		for (Order order : response.getDataList()) {
+			fillData(order);
+		}
+		return response;
+	}
+
+	private void addCountryOriginWhereClause(BasicDBObject query, Order entity) {
+		if (entity.getCountryOrigin() != null)
+			query.append("countryOrigin_id", entity.getCountryOrigin().getId());
+	}
+
+	private void addCityDestinyWhereClause(SearchOrdersRequest request, BasicDBObject query, Order entity) {
+		if (request.getLocationType() == SearchLocationType.CITY && entity.getCityDestiny() != null) 
+			query.append("cityDestiny_id", entity.getCityDestiny().getId());
+	}
+	
+	private void addProvinceDestinyWhereClause(SearchOrdersRequest request,BasicDBObject query, Order entity) {
+		if (request.getLocationType() == SearchLocationType.PROVINCE && entity.getProvinceDestiny() != null)
+			query.append("provinceDestiny_id", entity.getProvinceDestiny().getId());
+	}
+
+	private void addCountryDestinyWhereClause(SearchOrdersRequest request, BasicDBObject query, Order entity) {
+		if (request.getLocationType() == SearchLocationType.COUNTRY && entity.getCountryDestiny() != null)
+			query.append("countryDestiny_id", entity.getCountryDestiny().getId());
+	}
+
 
 	@Override
 	protected String getSequenceName() {
@@ -56,6 +97,7 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		destiny.append("productDescription", source.getProductDescription());
 		destiny.append("productImageBase64", source.getProductImageBase64());
 		destiny.append("countryDestiny_id", source.getCountryDestiny().getId());
+		destiny.append("countryOrigin_id", source.getCountryOrigin().getId());
 		destiny.append("provinceDestiny_id", source.getProvinceDestiny().getId());
 		destiny.append("cityDestiny_id", source.getCityDestiny().getId());
 		destiny.append("wishDeliveryDate", source.getWishDeliveryDate());
@@ -75,6 +117,7 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		order.setProductDescription(source.getString("productDescription"));
 		order.setProductImageBase64(source.getString("productImageBase64"));
 		order.setCountryDestiny(new Country(source.getLong("countryDestiny_id")));
+		order.setCountryOrigin(new Country(source.getLong("countryOrigin_id")));
 		order.setProvinceDestiny(new Province(source.getLong("provinceDestiny_id")));
 		order.setCityDestiny(new City(source.getLong("cityDestiny_id")));
 		order.setWishDeliveryDate(source.getDate("wishDeliveryDate"));
@@ -88,6 +131,7 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		order.setCityDestiny(cityDAO.findById(City.class, order.getCityDestiny().getId()));
 		order.setProvinceDestiny(provinceDAO.findById(Province.class, order.getProvinceDestiny().getId()));
 		order.setCountryDestiny(countryDAO.findById(Country.class, order.getCountryDestiny().getId()));
+		order.setCountryOrigin(countryDAO.findById(Country.class, order.getCountryOrigin().getId()));
 	}
 
 }

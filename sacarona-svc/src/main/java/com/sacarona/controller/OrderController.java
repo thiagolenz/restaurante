@@ -14,6 +14,8 @@ import com.sacarona.common.response.Response;
 import com.sacarona.common.svc.controller.ServiceRequestFactory;
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
+import com.sacarona.controller.request.SearchLocationType;
+import com.sacarona.controller.request.SearchOrdersRequest;
 import com.sacarona.model.order.Order;
 import com.sacarona.service.OrderService;
 
@@ -52,5 +54,14 @@ public class OrderController {
 		Order order = new Order();
 		order.setUserId(id);
 		return orderService.findOrdersByUser(requestFactory.createServiceRequest(order, requestContext));
+	}
+	
+	@RequestMapping(value="/findOrders/{locationType}", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ServiceCollectionResponse<Order> findOrders (@RequestBody Order order, @PathVariable ("locationType") String locationType) throws BusinessException {
+		SearchOrdersRequest request = 
+				new SearchOrdersRequest(requestFactory.createServiceRequest(order, requestContext), 
+				SearchLocationType.valueOf(locationType.toUpperCase()));
+		return orderService.findOrders(request);
 	}
 }

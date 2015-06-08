@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
+import com.sacarona.controller.request.SearchOrdersRequest;
 import com.sacarona.dao.OrderDAO;
 import com.sacarona.model.order.Order;
 import com.sacarona.service.OrderService;
@@ -38,6 +39,15 @@ public class OrderServiceImpl implements OrderService {
 	public ServiceCollectionResponse<Order> findOrdersByUser(ServiceRequest<Order> request) throws BusinessException {
 		try {
 			return orderDAO.findOrdersByUser(request);
+		} catch (UnknownHostException e) {
+			throw new BusinessException(e);
+		}
+	}
+	
+	@Override
+	public ServiceCollectionResponse<Order> findOrders(SearchOrdersRequest request) throws BusinessException {
+		try {
+			return orderDAO.findOrders(request);
 		} catch (UnknownHostException e) {
 			throw new BusinessException(e);
 		}

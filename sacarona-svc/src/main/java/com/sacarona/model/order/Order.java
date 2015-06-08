@@ -19,6 +19,7 @@ public class Order extends AbstractEntity {
 	private Province provinceDestiny;
 	private City cityDestiny;
 	private Date wishDeliveryDate;
+	private Country countryOrigin;
 	private String bonus;
 	private Long userId;
 	private Date createDate;
@@ -108,5 +109,11 @@ public class Order extends AbstractEntity {
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	public Country getCountryOrigin() {
+		return countryOrigin;
+	}
+	public void setCountryOrigin(Country countryOrigin) {
+		this.countryOrigin = countryOrigin;
 	}
 }
