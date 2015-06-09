@@ -1,5 +1,6 @@
 package com.sacarona.dao.impl;
 
+import java.math.BigDecimal;
 import java.net.UnknownHostException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.sacarona.dao.CountryDAO;
 import com.sacarona.dao.OrderDAO;
 import com.sacarona.dao.ProvinceDAO;
 import com.sacarona.model.order.Order;
+import com.sacarona.model.order.OrderStatus;
 import com.sacarona.model.world.City;
 import com.sacarona.model.world.Country;
 import com.sacarona.model.world.Province;
@@ -48,6 +50,8 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		addCityDestinyWhereClause(request, query, entity);
 		addProvinceDestinyWhereClause(request, query, entity);
 		addCountryDestinyWhereClause(request, query, entity);
+		
+		query.append("orderStatus", OrderStatus.OPEN.toString());
 
 		ServiceCollectionResponse<Order> response = executeQueryPatination(request.getRequest(), query);
 		for (Order order : response.getDataList()) {
@@ -101,9 +105,10 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		destiny.append("provinceDestiny_id", source.getProvinceDestiny().getId());
 		destiny.append("cityDestiny_id", source.getCityDestiny().getId());
 		destiny.append("wishDeliveryDate", source.getWishDeliveryDate());
-		destiny.append("bonus", source.getBonus());
+		destiny.append("bonus", source.getBonus().doubleValue());
 		destiny.append("userId", source.getUserId());
 		destiny.append("createDate", source.getCreateDate());
+		destiny.append("orderStatus", source.getOrderStatus().toString());
 	}
 
 	@Override
@@ -121,9 +126,10 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		order.setProvinceDestiny(new Province(source.getLong("provinceDestiny_id")));
 		order.setCityDestiny(new City(source.getLong("cityDestiny_id")));
 		order.setWishDeliveryDate(source.getDate("wishDeliveryDate"));
-		order.setBonus(source.getString("bonus"));
+		order.setBonus(new BigDecimal(source.getDouble("bonus")));
 		order.setUserId(source.getLong("userId"));
 		order.setCreateDate(source.getDate("createDate"));
+		order.setOrderStatus(OrderStatus.valueOf(source.getString("orderStatus")));
 		return order;
 	}
 	

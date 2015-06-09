@@ -172,7 +172,7 @@ public abstract class AbstractDaoImpl <T extends AbstractEntity> implements Gene
 
 	protected abstract String getCollectionName ();
 
-	protected abstract void mapObject (T object, BasicDBObject objectDestiny);
+	protected abstract void mapObject (T source, BasicDBObject destiny);
 
-	protected abstract T mapResult (BasicDBObject objectDestiny);
+	protected abstract T mapResult (BasicDBObject source);
 }

@@ -1,5 +1,6 @@
 package com.sacarona.model.order;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.sacarona.model.AbstractEntity;
@@ -20,9 +21,11 @@ public class Order extends AbstractEntity {
 	private City cityDestiny;
 	private Date wishDeliveryDate;
 	private Country countryOrigin;
-	private String bonus;
+	private BigDecimal bonus;
 	private Long userId;
 	private Date createDate;
+	
+	private OrderStatus orderStatus;
 	
 	public Long getId() {
 		return id;
@@ -90,10 +93,10 @@ public class Order extends AbstractEntity {
 	public void setWishDeliveryDate(Date wishDeliveryDate) {
 		this.wishDeliveryDate = wishDeliveryDate;
 	}
-	public String getBonus() {
+	public BigDecimal getBonus() {
 		return bonus;
 	}
-	public void setBonus(String bonus) {
+	public void setBonus(BigDecimal bonus) {
 		this.bonus = bonus;
 	}
 	
@@ -115,5 +118,13 @@ public class Order extends AbstractEntity {
 	}
 	public void setCountryOrigin(Country countryOrigin) {
 		this.countryOrigin = countryOrigin;
+	}
+	
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+	
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 }

@@ -12,6 +12,7 @@ import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.controller.request.SearchOrdersRequest;
 import com.sacarona.dao.OrderDAO;
 import com.sacarona.model.order.Order;
+import com.sacarona.model.order.OrderStatus;
 import com.sacarona.service.OrderService;
 
 @Service
@@ -21,6 +22,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order insert(Order order) {
 		order.setCreateDate(new Date());
+		order.setOrderStatus(OrderStatus.OPEN);
 		return orderDAO.insert(order);
 	}
 

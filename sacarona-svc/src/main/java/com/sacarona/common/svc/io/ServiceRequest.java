@@ -15,7 +15,7 @@ public class ServiceRequest<T> implements Serializable {
 
 	private static final long serialVersionUID = 2895009578384768374L;
 	private T entity;
-	private int recordsRange;
+	private int recordsRange = 10;
 	private int currentPage = 0;
 	private boolean admin;
 	private User user;
