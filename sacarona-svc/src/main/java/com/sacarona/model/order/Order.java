@@ -13,7 +13,6 @@ public class Order extends AbstractEntity {
 	private String productName;
 	private String productBrand;
 	private String productPrice;
-	private String storeName;
 	private String productDescription;
 	private String productImageBase64;
 	private Country countryDestiny;
@@ -50,12 +49,6 @@ public class Order extends AbstractEntity {
 	}
 	public void setProductPrice(String productPrice) {
 		this.productPrice = productPrice;
-	}
-	public String getStoreName() {
-		return storeName;
-	}
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
 	}
 	public String getProductDescription() {
 		return productDescription;

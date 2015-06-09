@@ -35,6 +35,7 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile> implements 
 	protected void mapObject(UserProfile profile, BasicDBObject destiny) {
 		destiny.append("id", profile.getId());
 		destiny.append("cellPhoneNumber", profile.getCellPhoneNumber());
+		destiny.append("whatsAppNumber", profile.getWhatsAppNumber());
 		destiny.append("cellPhoneType", profile.getCellPhoneType());
 		destiny.append("address", profile.getAddress());
 		destiny.append("addressType", profile.getAddressType());
@@ -46,9 +47,11 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile> implements 
 		destiny.append("contactTwitter", profile.isContactTwitter());
 		destiny.append("contactFacebook", profile.isContactFacebook());
 		destiny.append("contactGoogle", profile.isContactTwitter());
+		destiny.append("contactLinkedin", profile.isContactLinkedin());
 		destiny.append("facebookUrl", profile.getFacebookUrl());
 		destiny.append("twitterUrl", profile.getTwitterUrl());
 		destiny.append("googleUrl", profile.getGoogleUrl());
+		destiny.append("linkedinUrl", profile.getLinkedinUrl());
 	}
 
 	@Override
@@ -56,6 +59,7 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile> implements 
 		UserProfile profile = new UserProfile();
 		profile.setId(source.getLong("id"));
 		profile.setCellPhoneNumber(source.getString("cellPhoneNumber"));
+		profile.setWhatsAppNumber(source.getString("whatsAppNumber"));
 		profile.setCellPhoneType(source.getString("cellPhoneType"));
 		profile.setAddress(source.getString("address"));
 		profile.setAddressType(source.getString("addressType"));
@@ -67,9 +71,11 @@ public class UserProfileDaoImpl extends AbstractDaoImpl<UserProfile> implements 
 		profile.setContactFacebook(source.getBoolean("contactFacebook"));
 		profile.setContactGoogle(source.getBoolean("contactGoogle"));
 		profile.setContactTwitter(source.getBoolean("contactTwitter"));
+		profile.setContactLinkedin(source.getBoolean("contactLinkedin"));
 		profile.setFacebookUrl(source.getString("facebookUrl"));
 		profile.setGoogleUrl(source.getString("googleUrl"));
 		profile.setTwitterUrl(source.getString("twitterUrl"));
+		profile.setLinkedinUrl(source.getString("linkedinUrl"));
 		return profile;
 	}
 	

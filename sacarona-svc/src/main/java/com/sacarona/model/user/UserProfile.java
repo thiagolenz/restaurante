@@ -9,6 +9,7 @@ public class UserProfile extends AbstractEntity {
 	private Long id;
 	private String cellPhoneNumber;
 	private String cellPhoneType;
+	private String whatsAppNumber;
 	private String address;
 	private String addressType;
 	private City city;
@@ -19,10 +20,12 @@ public class UserProfile extends AbstractEntity {
 	private boolean contactTwitter;
 	private boolean contactFacebook;
 	private boolean contactGoogle;
+	private boolean contactLinkedin;
 	
 	private String facebookUrl;
 	private String googleUrl;
 	private String twitterUrl;
+	private String linkedinUrl;
 	
 	public Long getId() {
 		return id;
@@ -124,4 +127,22 @@ public class UserProfile extends AbstractEntity {
 	public void setTwitterUrl(String twitterUrl) {
 		this.twitterUrl = twitterUrl;
 	}	
+	public String getWhatsAppNumber() {
+		return whatsAppNumber;
+	}
+	public void setWhatsAppNumber(String whatsAppNumber) {
+		this.whatsAppNumber = whatsAppNumber;
+	}
+	public boolean isContactLinkedin() {
+		return contactLinkedin;
+	}
+	public void setContactLinkedin(boolean contactLinkedin) {
+		this.contactLinkedin = contactLinkedin;
+	}
+	public String getLinkedinUrl() {
+		return linkedinUrl;
+	}
+	public void setLinkedinUrl(String linkedinUrl) {
+		this.linkedinUrl = linkedinUrl;
+	}
 }

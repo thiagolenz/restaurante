@@ -101,7 +101,6 @@ public class TravelDaoImpl extends AbstractDaoImpl<Travel> implements TravelDAO 
 		destiny.append("cityDestiny_id", source.getCityDestiny().getId());
 		destiny.append("departureDate", source.getDepartureDate());
 		destiny.append("backDate", source.getBackDate());
-		destiny.append("ticketPictureBase64", source.getTicketPictureBase64());
 		destiny.append("confirmed", source.isConfirmed());
 		destiny.append("canceled", source.isCanceled());
 		destiny.append("createDate", source.getCreateDate());
@@ -122,7 +121,6 @@ public class TravelDaoImpl extends AbstractDaoImpl<Travel> implements TravelDAO 
 		
 		travel.setDepartureDate(source.getDate("departureDate"));
 		travel.setBackDate(source.getDate("backDate"));
-		travel.setTicketPictureBase64(source.getString("ticketPictureBase64"));
 		travel.setConfirmed(source.getBoolean("confirmed"));
 		travel.setCanceled(source.getBoolean("canceled"));
 		travel.setCreateDate(source.getDate("createDate"));

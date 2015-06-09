@@ -21,7 +21,6 @@ public class Travel extends AbstractEntity {
 	private Date departureDate;
 	private Date backDate;
 	
-	private String ticketPictureBase64;
 	private boolean confirmed;
 	private boolean canceled;
 	
@@ -81,12 +80,6 @@ public class Travel extends AbstractEntity {
 	}
 	public void setBackDate(Date backDate) {
 		this.backDate = backDate;
-	}
-	public String getTicketPictureBase64() {
-		return ticketPictureBase64;
-	}
-	public void setTicketPictureBase64(String ticketPictureBase64) {
-		this.ticketPictureBase64 = ticketPictureBase64;
 	}
 	public boolean isConfirmed() {
 		return confirmed;

@@ -97,7 +97,6 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		destiny.append("productName", source.getProductName());
 		destiny.append("productBrand", source.getProductBrand());
 		destiny.append("productPrice", source.getProductPrice());
-		destiny.append("storeName", source.getStoreName());
 		destiny.append("productDescription", source.getProductDescription());
 		destiny.append("productImageBase64", source.getProductImageBase64());
 		destiny.append("countryDestiny_id", source.getCountryDestiny().getId());
@@ -118,7 +117,6 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		order.setProductName(source.getString("productName"));
 		order.setProductBrand(source.getString("productBrand"));
 		order.setProductPrice(source.getString("productPrice"));
-		order.setStoreName(source.getString("storeName"));
 		order.setProductDescription(source.getString("productDescription"));
 		order.setProductImageBase64(source.getString("productImageBase64"));
 		order.setCountryDestiny(new Country(source.getLong("countryDestiny_id")));
