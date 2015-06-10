@@ -26,6 +26,15 @@ public class Order extends AbstractEntity {
 	
 	private OrderStatus orderStatus;
 	
+	public Order() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Order(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

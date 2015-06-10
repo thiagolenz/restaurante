@@ -40,6 +40,13 @@ public class TravelDaoImpl extends AbstractDaoImpl<Travel> implements TravelDAO 
 	}
 	
 	@Override
+	public Travel findDetail(Long id) {
+		Travel result = findById(Travel.class, id);
+		fillData(result);
+		return result;
+	}
+	
+	@Override
 	public ServiceCollectionResponse<Travel> findTravelers(SearchTravelersRequest request) throws UnknownHostException {
 		BasicDBObject query = new BasicDBObject();
 		Travel entity = request.getRequest().getEntity();

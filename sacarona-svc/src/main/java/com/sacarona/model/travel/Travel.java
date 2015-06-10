@@ -27,6 +27,17 @@ public class Travel extends AbstractEntity {
 	private Date createDate;
 	private Long userId;
 	
+	public Travel() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public Travel(Long id) {
+		super();
+		this.id = id;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

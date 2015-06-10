@@ -40,6 +40,12 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDAO {
 		return response;
 	}
 	
+	public Order findDetail(Long id) {
+		Order order = findById(Order.class, id);
+		fillData(order);
+		return order;
+	}
+	
 	@Override
 	public ServiceCollectionResponse<Order> findOrders(SearchOrdersRequest request) throws UnknownHostException {
 		BasicDBObject query = new BasicDBObject();
