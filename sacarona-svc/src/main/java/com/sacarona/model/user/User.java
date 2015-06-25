@@ -1,8 +1,23 @@
 package com.sacarona.model.user;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 import com.sacarona.model.AbstractEntity;
 
-public class User extends AbstractEntity{
+@Entity
+@Table(name="users")
+public class User extends AbstractEntity {
+	@SequenceGenerator(name="seq_users",
+			sequenceName="seq_users",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_users")
+	@Id
 	private Long id;
 	private String name;
 	private String lang;
@@ -10,7 +25,7 @@ public class User extends AbstractEntity{
 	private String email;
 	
 	public User() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public User(Long id) {

@@ -3,9 +3,22 @@ package com.sacarona.model.feedback;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 import com.sacarona.model.AbstractEntity;
 
+@Entity
 public class Feedback extends AbstractEntity {
+	@SequenceGenerator(name="seq_feedback",
+			sequenceName="seq_feedback",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_feedback")
+	@Id
 	private Long id;
 	private Long userGaveId;
 	private Long userReceivedId;

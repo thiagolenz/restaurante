@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.dao.AppUserAuthDAO;
@@ -17,6 +18,7 @@ public class AppUserAuthServiceImpl implements AppUserAuthService {
 	@Autowired
 	private AppUserAuthDAO appUserAuthDAO;
 	
+	@Transactional
 	public AppUserAuth createNew (User user) {
 		AppUserAuth auth = new AppUserAuth();
 		auth.setAppToken(UUID.randomUUID().toString());
@@ -26,6 +28,7 @@ public class AppUserAuthServiceImpl implements AppUserAuthService {
 		return appUserAuthDAO.insert(auth);
 	}
 
+	@Transactional
 	public AppUserAuth find(AppUserAuth userAuth) throws BusinessException {
 		try {
 			return appUserAuthDAO.find(userAuth);

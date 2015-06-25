@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
@@ -18,7 +19,7 @@ public class ProvinceServiceImpl implements ProvinceService {
 	@Autowired
 	private ProvinceDAO provinceDAO;
 	
-	@Override
+	@Transactional
 	public void insertOrUpdate(List<Province> provinces) throws BusinessException {
 		try {
 			for (Province province : provinces) {
@@ -34,7 +35,7 @@ public class ProvinceServiceImpl implements ProvinceService {
 		}
 	}
 
-	@Override
+	@Transactional
 	public ServiceCollectionResponse<Province> search(ServiceRequest<Province> request) throws BusinessException {
 		try {
 			return provinceDAO.search(request);

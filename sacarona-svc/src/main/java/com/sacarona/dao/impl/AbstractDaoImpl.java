@@ -1,6 +1,7 @@
 package com.sacarona.dao.impl;
 
 import java.net.UnknownHostException;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -11,6 +12,8 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.GenericDAO;
@@ -25,6 +28,12 @@ public abstract class AbstractDaoImpl <T extends AbstractEntity> implements Gene
 
 	@Value("${mongodb.database}" )
 	protected String database;
+	
+	@Value("${mongodb.user}" )
+	protected String mongoUser;
+	
+	@Value("${mongodb.password}" )
+	protected String mongoPwd;
 
 	private BulkWriteOperation builder;
 
@@ -122,7 +131,11 @@ public abstract class AbstractDaoImpl <T extends AbstractEntity> implements Gene
 
 	protected DB getDB () throws UnknownHostException {
 		if (this.db == null) {
-			MongoClient mongoClient = new MongoClient( mongodbHost , Integer.valueOf(mongoDbPort) );
+			MongoCredential credential = MongoCredential.createMongoCRCredential(mongoUser, database, mongoPwd.toCharArray());
+			MongoClient mongoClient = new MongoClient(new ServerAddress(mongodbHost), Arrays.asList(credential));
+//			MongoClientURI uri = new MongoClientURI("mongodb://"+mongoUser+":"+mongoPwd+"@"+mongodbHost+"/?authSource="+database);
+//			MongoClient mongoClient = new MongoClient( mongodbHost , Integer.valueOf(mongoDbPort) );
+//			MongoClient mongoClient = new MongoClient(uri);
 			this.db = mongoClient.getDB(database);
 		}
 		return db;

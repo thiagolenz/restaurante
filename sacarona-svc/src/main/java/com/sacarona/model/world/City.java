@@ -1,17 +1,33 @@
 package com.sacarona.model.world;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
+
 import com.sacarona.model.AbstractEntity;
 
+@Entity
 public class City extends AbstractEntity{
+	@SequenceGenerator(name="seq_city",
+			sequenceName="seq_city",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_city")
+	@Id
 	private Long id;
 	private String name;
 	private String code;
 	private String countryIso;
 	private String provinceAbbreviation;
+	
+	@Transient
 	private String completeName;
 	
 	public City() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public City(Long id) {

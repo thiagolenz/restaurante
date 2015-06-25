@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.dao.UserDAO;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private AppUserAuthService appUserAuthService;
 	
-	@Override
+	@Transactional
 	public User findOrCreate (User user) throws BusinessException {
 		User userTemp;
 		try {
@@ -34,31 +35,23 @@ public class UserServiceImpl implements UserService {
 		return userTemp;
 	}
 
+	@Transactional
 	public User insert(User user) throws BusinessException {
 		userDAO.insert(user);
 		return user;
 	}
 
-	@Override
+	@Transactional
 	public User updateUser(User user, Long id) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		userDAO.update(user, id);
+		return user;
 	}
 
-	@Override
-	public void remove(Long id) throws BusinessException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
+	@Transactional
 	public User findByTokenAndApp(String userToken, String appToken) throws BusinessException {
 		AppUserAuth auth = appUserAuthService.find(new AppUserAuth(appToken, userToken));
 		if (auth != null)
 			return userDAO.findById(User.class, auth.getUserId());
 		return null;
 	}
-
-	
-
 }

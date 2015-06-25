@@ -23,6 +23,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.google.common.base.Strings;
 import com.sacarona.common.response.Response;
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.model.world.Country;
@@ -113,6 +114,10 @@ public class CountryImporterController {
 						country.setUn(country.getIso());
 					country.setNamePortuguese(mapPort.get(country.getUn()));
 					country.setNameSpanish(mapSpanish.get(country.getIso()));
+					if (Strings.isNullOrEmpty(country.getNameSpanish()))
+						country.setNameSpanish(country.getNameEnglish());
+					if (Strings.isNullOrEmpty(country.getNamePortuguese()))
+						country.setNamePortuguese(country.getNameEnglish());
 					result.add(country);
 				}
 			}

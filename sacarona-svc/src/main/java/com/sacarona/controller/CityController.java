@@ -44,7 +44,9 @@ public class CityController {
 	public City insert (@RequestBody City city) throws BusinessException {
 		List<City> list = new ArrayList<>();
 		list.add(city);
-		cityService.insertOrUpdate(list);
+		for (City city2 : list) {
+			cityService.insertOrUpdate(city2);
+		}
 		return city;
 	}
 	

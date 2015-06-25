@@ -8,8 +8,6 @@ public interface UserService {
 	
 	User updateUser (User user, Long id) throws BusinessException;
 	
-	void remove (Long id) throws BusinessException;
-	
 	User findByTokenAndApp (String userToken, String appToken) throws BusinessException;
 	
 	User findOrCreate (User user) throws BusinessException;

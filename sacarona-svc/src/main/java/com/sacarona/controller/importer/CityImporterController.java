@@ -32,9 +32,20 @@ public class CityImporterController {
 	@RequestMapping(value="/import", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody 
 	public Response importStates () throws IOException, BusinessException {
-		cityService.insertOrUpdate(importCities(1));
-		cityService.insertOrUpdate(importCities(2));
-		cityService.insertOrUpdate(importCities(3));
+		List<City> cities = importCities(1);
+		for (City city : cities) {
+			cityService.insertOrUpdate(city);	
+		}
+		
+		cities = importCities(2);
+		for (City city : cities) {
+			cityService.insertOrUpdate(city);	
+		}
+		
+		cities = importCities(3);
+		for (City city : cities) {
+			cityService.insertOrUpdate(city);	
+		}
 		return Response.newSuccessResponse();
 	}
 	

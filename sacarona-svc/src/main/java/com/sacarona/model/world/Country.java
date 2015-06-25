@@ -1,8 +1,21 @@
 package com.sacarona.model.world;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 import com.sacarona.model.AbstractEntity;
 
+@Entity
 public class Country extends AbstractEntity{
+	@SequenceGenerator(name="seq_country",
+			sequenceName="seq_country",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_country")
+	@Id
 	private Long id;
 	private String nameEnglish;
 	private String nameSpanish;

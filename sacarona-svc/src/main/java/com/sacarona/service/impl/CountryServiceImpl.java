@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
@@ -19,7 +20,7 @@ public class CountryServiceImpl implements CountryService {
 	@Autowired 
 	private CountryDAO countryDAO;
 
-	@Override
+	@Transactional
 	public void insertOrUpdate(List<Country> list) throws BusinessException {
 		for (Country country : list) {
 			System.out.println("inserting " + country);
@@ -36,7 +37,7 @@ public class CountryServiceImpl implements CountryService {
 		}
 	}
 
-	@Override
+	@Transactional
 	public ServiceCollectionResponse<Country> search(ServiceRequest<Country> request) throws BusinessException {
 		try {
 			return countryDAO.search(request);

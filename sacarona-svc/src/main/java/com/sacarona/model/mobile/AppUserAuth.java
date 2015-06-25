@@ -1,8 +1,21 @@
 package com.sacarona.model.mobile;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 import com.sacarona.model.AbstractEntity;
 
+@Entity
 public class AppUserAuth extends AbstractEntity{
+	@SequenceGenerator(name="seq_app_user_auth",
+			sequenceName="seq_app_user_auth",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_app_user_auth")
+	@Id
 	private Long id;
 	private String appToken;
 	private String userToken;

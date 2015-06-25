@@ -1,97 +1,57 @@
 package com.sacarona.dao.impl;
 
 import java.net.UnknownHostException;
-import java.util.regex.Pattern;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.CountryDAO;
 import com.sacarona.model.world.Country;
 
 @Repository
-public class CountryDaoImpl extends AbstractDaoImpl<Country> implements CountryDAO {
-
-	@Override
-	protected String getSequenceName() {
-		return "seq_country";
-	}
-
-	@Override
-	protected String getCollectionName() {
-		return "country";
-	}
-
-	@Override
-	protected void mapObject(Country source, BasicDBObject destiny) {
-		destiny.append("id", source.getId());
-		destiny.append("iso", source.getIso());
-		destiny.append("nameEnglish", source.getNameEnglish());
-		destiny.append("namePortuguese", source.getNamePortuguese());
-		destiny.append("nameSpanish", source.getNameSpanish());
-		destiny.append("un", source.getUn());
-		destiny.append("externalId", source.getExternalId());
-	}
-
-	@Override
-	protected Country mapResult(BasicDBObject destiny) {
-		Country country = new Country();
-		country.setId(destiny.getLong("id"));
-		country.setIso(destiny.getString("iso"));
-		country.setNameEnglish(destiny.getString("nameEnglish"));
-		country.setNamePortuguese(destiny.getString("namePortuguese"));
-		country.setNameSpanish(destiny.getString("nameSpanish"));
-		country.setUn(destiny.getString("un"));
-		country.setExternalId(destiny.getLong("externalId"));
-		return country;
-	}
-
+public class CountryDaoImpl extends AbstractJpaDaoImpl<Country> implements CountryDAO {
 	@Override
 	public Country findByExternalId (Long id) throws UnknownHostException {
-		BasicDBObject query = new BasicDBObject();
-		query.append("externalId", id);
+		TypedQuery<Country> query = em.createQuery("from Country o where o.externalId = :externalId ", Country.class);
+		query.setParameter("externalId", id);
 		return singleQuery(query);
 	}
 	
 	@Override
 	public ServiceCollectionResponse<Country> search(ServiceRequest<Country> request) throws UnknownHostException {
-		BasicDBObject query = new BasicDBObject();
 		Country country = request.getEntity();
-		Pattern queryName = Pattern.compile("^" +country.getNameEnglish());
-		addNameQueryParam(request, query, queryName);
-		return executeQueryPatination(request, query);
+		StringBuilder builder = new StringBuilder("from Country where ");
+		Map<String, String> params = new HashMap<String, String>();
+		addNameQueryParam(request, builder, country.getNameEnglish(), params);
+		TypedQuery<Country> query = em.createQuery(builder.toString(), Country.class);
+		query.setParameter("name", params.get("name"));
+		return executeQueryForPagination(query, request);
 	}
 
-	private void addNameQueryParam(ServiceRequest<Country> request,
-			BasicDBObject query, Pattern queryName) {
+	private void addNameQueryParam(ServiceRequest<Country> request, StringBuilder builder, String name, Map<String, String> params) {
 		String lang = request.getUser().getLang(); 
+		params.put("name", name + "%");
 		if (lang == null)
 			lang = "en-US";
-		if (lang.equals("en-US"))
-			query.put("nameEnglish", queryName);
-		else if (lang.equals("es"))
-			query.put("nameSpanish", queryName);
-		else 
-			query.put("namePortuguese", queryName);
+		if (lang.equals("en-US")) {
+			builder.append(" o.nameEnglish = :name");
+		} else if (lang.equals("es")) {
+			builder.append(" o.nameSpanish = :name");
+		} else { 
+			builder.append(" o.namePortuguese = :name");
+		}
 	}
 	
 	@Override
 	public Country findByIsoCode(String iso) throws UnknownHostException {
-		BasicDBObject query = new BasicDBObject();
-		query.append("iso", iso);
-		DBCursor result = getCollection().find(query);
-		
-		if (result.hasNext()) {
-			DBObject next = result.next();
-			Country country = mapResult((BasicDBObject) next);
-			result.close();
-			return country;
-		}
-		return null;
+		TypedQuery<Country> query = em.createQuery("from Country o where o.iso = :iso ", Country.class);
+		query.setParameter("iso", iso);
+		return singleQuery(query);
 	}
 
 }
