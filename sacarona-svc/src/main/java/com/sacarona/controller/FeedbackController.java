@@ -50,6 +50,9 @@ public class FeedbackController {
 	@RequestMapping(value="/findAverage/{id}", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public FeedbackAverage findAverage (@PathVariable ("id") Long id) throws BusinessException {
-		return feedbackService.findAverageByUser(id);
+		FeedbackAverage feedback = feedbackService.findAverageByUser(id);
+		if (feedback == null)
+			feedback = new FeedbackAverage();
+		return feedback;
 	}
 }

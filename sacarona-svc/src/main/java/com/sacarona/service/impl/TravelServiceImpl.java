@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
@@ -18,19 +19,19 @@ import com.sacarona.service.TravelService;
 public class TravelServiceImpl implements TravelService {
 	@Autowired private TravelDAO travelDAO;
 
-	@Override
+	@Transactional
 	public Travel insert(Travel travel) {
 		travel.setCreateDate(new Date());
 		return travelDAO.insert(travel);
 	}
 
-	@Override
+	@Transactional
 	public Travel update(Travel travel, Long id) {
 		travelDAO.update(travel, id);
 		return travel;
 	}
 
-	@Override
+	@Transactional
 	public ServiceCollectionResponse<Travel> findByUser(ServiceRequest<Travel> request) throws BusinessException {
 		try {
 			return travelDAO.findByUser(request);
@@ -39,7 +40,7 @@ public class TravelServiceImpl implements TravelService {
 		}
 	}
 	
-	@Override
+	@Transactional
 	public ServiceCollectionResponse<Travel> findTravelers(SearchTravelersRequest request) throws BusinessException {
 		try {
 			return travelDAO.findTravelers(request);

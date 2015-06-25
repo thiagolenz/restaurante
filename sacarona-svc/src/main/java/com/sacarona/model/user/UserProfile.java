@@ -1,20 +1,45 @@
 package com.sacarona.model.user;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+
 import com.sacarona.model.AbstractEntity;
 import com.sacarona.model.world.City;
 import com.sacarona.model.world.Country;
 import com.sacarona.model.world.Province;
 
+@Entity
 public class UserProfile extends AbstractEntity {
+	@SequenceGenerator(name="seq_user_profile",
+			sequenceName="seq_user_profile",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_user_profile")
+	@Id
 	private Long id;
 	private String cellPhoneNumber;
 	private String cellPhoneType;
 	private String whatsAppNumber;
 	private String address;
 	private String addressType;
+	
+	@ManyToOne
+	@JoinColumn(name = "city_id")
 	private City city;
+	
+	@ManyToOne
+	@JoinColumn(name = "country_id")
 	private Country country;
+	
+	@ManyToOne
+	@JoinColumn(name = "province_id")
 	private Province province;
+	
 	private String zipCode;
 	private Long userId; 
 	private boolean contactTwitter;

@@ -25,7 +25,7 @@ public class CountryDaoImpl extends AbstractJpaDaoImpl<Country> implements Count
 	@Override
 	public ServiceCollectionResponse<Country> search(ServiceRequest<Country> request) throws UnknownHostException {
 		Country country = request.getEntity();
-		StringBuilder builder = new StringBuilder("from Country where ");
+		StringBuilder builder = new StringBuilder("from Country o where ");
 		Map<String, String> params = new HashMap<String, String>();
 		addNameQueryParam(request, builder, country.getNameEnglish(), params);
 		TypedQuery<Country> query = em.createQuery(builder.toString(), Country.class);
@@ -39,16 +39,16 @@ public class CountryDaoImpl extends AbstractJpaDaoImpl<Country> implements Count
 		if (lang == null)
 			lang = "en-US";
 		if (lang.equals("en-US")) {
-			builder.append(" o.nameEnglish = :name");
+			builder.append(" o.nameEnglish like :name order by o.nameEnglish");
 		} else if (lang.equals("es")) {
-			builder.append(" o.nameSpanish = :name");
+			builder.append(" o.nameSpanish like :name order by o.nameSpanish");
 		} else { 
-			builder.append(" o.namePortuguese = :name");
+			builder.append(" o.namePortuguese like :name order by o.namePortuguese");
 		}
 	}
 	
 	@Override
-	public Country findByIsoCode(String iso) throws UnknownHostException {
+	public Country findByIsoCode(String iso) {
 		TypedQuery<Country> query = em.createQuery("from Country o where o.iso = :iso ", Country.class);
 		query.setParameter("iso", iso);
 		return singleQuery(query);

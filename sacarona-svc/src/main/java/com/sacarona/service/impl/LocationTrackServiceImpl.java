@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
@@ -17,12 +18,13 @@ import com.sacarona.service.LocationTrackService;
 public class LocationTrackServiceImpl implements LocationTrackService {
 	@Autowired private LocationTrackDAO locationTrackDAO;
 	
+	@Transactional
 	public LocationTrack insert(LocationTrack locationTrack) {
 		locationTrack.setTrackDate(new Date());
 		return locationTrackDAO.insert(locationTrack);
 	}
 
-	@Override
+	@Transactional
 	public ServiceCollectionResponse<LocationTrack> findByUser(ServiceRequest<LocationTrack> request) throws BusinessException {
 		try {
 			return locationTrackDAO.findByUser(request);

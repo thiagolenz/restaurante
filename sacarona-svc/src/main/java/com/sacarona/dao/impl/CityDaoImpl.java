@@ -30,7 +30,7 @@ public class CityDaoImpl extends AbstractJpaDaoImpl<City> implements CityDAO {
 
 	@Override
 	public ServiceCollectionResponse<City> search(ServiceRequest<City> request) throws UnknownHostException {
-		TypedQuery<City> query = em.createQuery("from City o where o.name like :name", City.class);
+		TypedQuery<City> query = em.createQuery("from City o where o.name like :name order by o.name", City.class);
 		query.setParameter("name", request.getEntity().getName() + "%");
 
 		ServiceCollectionResponse<City> result = executeQueryForPagination(query, request);

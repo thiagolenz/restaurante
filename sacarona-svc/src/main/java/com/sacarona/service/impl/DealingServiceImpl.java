@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
@@ -17,19 +18,19 @@ import com.sacarona.service.DealingService;
 public class DealingServiceImpl implements DealingService {
 	@Autowired private DealingDAO dealingDAO;
 
-	@Override
+	@Transactional
 	public Dealing insert(Dealing dealing) {
 		dealing.setCreateDate(new Date());
 		return dealingDAO.insert(dealing);
 	}
 
-	@Override
+	@Transactional
 	public Dealing update(Dealing dealing, Long id) {
 		dealingDAO.update(dealing, id);
 		return dealing;
 	}
 
-	@Override
+	@Transactional
 	public ServiceCollectionResponse<Dealing> findByUser(ServiceRequest<Dealing> request) throws BusinessException {
 		try {
 			return dealingDAO.findByUser(request);
@@ -38,7 +39,7 @@ public class DealingServiceImpl implements DealingService {
 		}
 	}
 
-	@Override
+	@Transactional
 	public void remove(Long dealingId) {
 		dealingDAO.remove(dealingDAO.findById(Dealing.class, dealingId));
 	}

@@ -83,7 +83,7 @@ public class AbstractJpaDaoImpl <T extends AbstractEntity>  implements GenericDA
 		}
 	}
 	
-	protected T singleQuery (TypedQuery<T> query) throws UnknownHostException {
+	protected T singleQuery (TypedQuery<T> query){
 		List<T> list = query.getResultList();
 		if (list.isEmpty())
 			return null;

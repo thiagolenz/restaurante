@@ -2,9 +2,22 @@ package com.sacarona.model.track;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 import com.sacarona.model.AbstractEntity;
 
+@Entity
 public class LocationTrack extends AbstractEntity {
+	@SequenceGenerator(name="seq_location_track",
+			sequenceName="seq_location_track",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_location_track")
+	@Id
 	private Long id;
 	private Long userId;
 	private String latitude;

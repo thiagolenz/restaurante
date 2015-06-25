@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.dao.CellPhoneRegisterDAO;
@@ -17,7 +18,7 @@ public class CellPhoneRegisterServiceImpl implements CellPhoneRegisterService {
 	@Autowired
 	private CellPhoneRegisterDAO registerDAO;
 	
-	@Override
+	@Transactional
 	public CellPhoneRegister updateConnect(CellPhoneRegister cellPhoneRegister) throws BusinessException {
 		CellPhoneRegister existent;
 		try {
@@ -35,12 +36,13 @@ public class CellPhoneRegisterServiceImpl implements CellPhoneRegisterService {
 		}
 	}
 	
+	@Transactional
 	public CellPhoneRegister insert(CellPhoneRegister cellPhoneRegister) {
 		cellPhoneRegister.setLastConnected(new Date());
 		return registerDAO.insert(cellPhoneRegister);
 	}
 	
-	@Override
+	@Transactional
 	public List<CellPhoneRegister> findByUser(Long userId) throws BusinessException {
 		try {
 			return registerDAO.findByUser(userId);

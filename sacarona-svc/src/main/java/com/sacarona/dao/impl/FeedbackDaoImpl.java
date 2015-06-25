@@ -1,11 +1,11 @@
 package com.sacarona.dao.impl;
 
-import java.math.BigDecimal;
 import java.net.UnknownHostException;
+
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.mongodb.BasicDBObject;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.FeedbackDAO;
@@ -16,9 +16,9 @@ public class FeedbackDaoImpl extends AbstractJpaDaoImpl<Feedback> implements Fee
 	
 	@Override
 	public ServiceCollectionResponse<Feedback> findByUser(ServiceRequest<Feedback> request) throws UnknownHostException {
-		BasicDBObject query = new BasicDBObject();
-		query.append("userReceivedId", request.getEntity().getUserReceivedId());
-		BasicDBObject orderBy = new BasicDBObject("feedbackDate", -1);
-		return executeQueryPatination(request, query, orderBy);
+		TypedQuery<Feedback> query = 
+				em.createQuery("from Feedback o where o.userReceivedId = :userReceivedId order by o.feedbackDate DESC", Feedback.class);
+		query.setParameter("userReceivedId", request.getEntity().getUserReceivedId());
+		return executeQueryForPagination(query, request);
 	}
 }

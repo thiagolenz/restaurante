@@ -1,21 +1,52 @@
 package com.sacarona.model.travel;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 import com.sacarona.model.AbstractEntity;
 import com.sacarona.model.world.City;
 import com.sacarona.model.world.Country;
 import com.sacarona.model.world.Province;
 
+@Entity
 public class Travel extends AbstractEntity {
+	@SequenceGenerator(name="seq_travel",
+			sequenceName="seq_travel",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_travel")
+	@Id
 	private Long id;
-	private Country countryOrigin;
-	private Province provinceOrigin;
-	private City cityOrigin;
 	
+	@ManyToOne
+	@JoinColumn(name = "city_origin_id")
+	private City cityOrigin;  
+	
+	@ManyToOne
+	@JoinColumn(name = "province_origin_id")
+	private Province provinceOrigin;
+
+	@ManyToOne
+	@JoinColumn(name = "country_origin_id")
+	private Country countryOrigin;
+	
+	@ManyToOne
+	@JoinColumn(name = "country_destiny_id")
 	private Country countryDestiny;
+	
+	@ManyToOne
+	@JoinColumn(name = "province_destiny_id")
 	private Province provinceDestiny;
+	
+	@ManyToOne
+	@JoinColumn(name = "city_destiny_id")
 	private City cityDestiny;  
 	
 	private Date departureDate;
@@ -31,13 +62,11 @@ public class Travel extends AbstractEntity {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
 	public Travel(Long id) {
 		super();
 		this.id = id;
 	}
-
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -50,18 +79,7 @@ public class Travel extends AbstractEntity {
 	public void setCountryOrigin(Country countryOrigin) {
 		this.countryOrigin = countryOrigin;
 	}
-	public Province getProvinceOrigin() {
-		return provinceOrigin;
-	}
-	public void setProvinceOrigin(Province provinceOrigin) {
-		this.provinceOrigin = provinceOrigin;
-	}
-	public City getCityOrigin() {
-		return cityOrigin;
-	}
-	public void setCityOrigin(City cityOrigin) {
-		this.cityOrigin = cityOrigin;
-	}
+	
 	public Country getCountryDestiny() {
 		return countryDestiny;
 	}
@@ -116,12 +134,21 @@ public class Travel extends AbstractEntity {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	
-	private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-	
-	@Override
-	public String toString() {
-		return "id = "+id + " - departureDAte " +format.format(departureDate);
+
+	public City getCityOrigin() {
+		return cityOrigin;
+	}
+
+	public void setCityOrigin(City cityOrigin) {
+		this.cityOrigin = cityOrigin;
+	}
+
+	public Province getProvinceOrigin() {
+		return provinceOrigin;
+	}
+
+	public void setProvinceOrigin(Province provinceOrigin) {
+		this.provinceOrigin = provinceOrigin;
 	}
 	
 }

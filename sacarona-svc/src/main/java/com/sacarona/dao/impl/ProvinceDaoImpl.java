@@ -19,7 +19,7 @@ public class ProvinceDaoImpl extends AbstractJpaDaoImpl<Province> implements Pro
 	private CountryDAO countryDAO;
 	
 	@Override
-	public Province findByAbbreviationAndCountry(String abbreviation, Long id) throws UnknownHostException {
+	public Province findByAbbreviationAndCountry(String abbreviation, Long id) {
 		TypedQuery<Province> query = em.createQuery("from Province o where o.countryId = :countryId and o.abbreviation = :abbreviation ", Province.class);
 		query.setParameter("countryId", id);
 		query.setParameter("abbreviation", abbreviation);

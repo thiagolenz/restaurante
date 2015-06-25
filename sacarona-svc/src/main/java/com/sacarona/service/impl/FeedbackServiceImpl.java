@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
@@ -20,6 +21,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Autowired private FeedbackDAO feedbackDAO;
 	@Autowired private FeedbackAverageDAO averageDAO;
 
+	@Transactional
 	public Feedback insert(Feedback feedback) throws BusinessException {
 		feedbackDAO.insert(feedback);
 		try {
@@ -30,7 +32,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 		return feedback;
 	}
 
-	@Override
+	@Transactional
 	public Feedback update(Feedback feedback, Long id) throws BusinessException {
 		feedbackDAO.update(feedback, id);
 		try {
@@ -41,6 +43,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 		return feedback;
 	}
 	
+	@Transactional
 	private void updateAverageScore (Feedback feedback) throws BusinessException, UnknownHostException {
 		ServiceRequest<Feedback> request = new ServiceRequest<>();
 		request.setRecordsRange(10);
@@ -62,7 +65,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 			averageDAO.update(average, average.getId());
 	}
 	
-	@Override
+	@Transactional
 	public FeedbackAverage findAverageByUser(Long userId) throws BusinessException {
 		try {
 			return averageDAO.findByUser(userId);
@@ -71,7 +74,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 		}
 	}
 
-	@Override
+	@Transactional
 	public ServiceCollectionResponse<Feedback> findByUser(ServiceRequest<Feedback> request) throws BusinessException{
 		try {
 			return feedbackDAO.findByUser(request);

@@ -4,10 +4,18 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>java:/sacaronaDS</jta-data-source>
         <class>com.sacarona.model.user.User</class>
+        <class>com.sacarona.model.user.UserProfile</class>
         <class>com.sacarona.model.mobile.AppUserAuth</class>
+        <class>com.sacarona.model.mobile.CellPhoneRegister</class>
        	<class>com.sacarona.model.world.City</class>
        	<class>com.sacarona.model.world.Province</class>
        	<class>com.sacarona.model.world.Country</class>
+       	<class>com.sacarona.model.feedback.Feedback</class>
+       	<class>com.sacarona.model.feedback.FeedbackAverage</class>
+       	<class>com.sacarona.model.track.LocationTrack</class>
+       	<class>com.sacarona.model.order.Order</class>
+       	<class>com.sacarona.model.travel.Travel</class>
+       	<class>com.sacarona.model.dealing.Dealing</class>
         <properties>
             <property name="hibernate.archive.autodetection" value="class, hbm"/>
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

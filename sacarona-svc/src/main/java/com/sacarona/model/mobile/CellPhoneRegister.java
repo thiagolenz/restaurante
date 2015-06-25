@@ -2,9 +2,22 @@ package com.sacarona.model.mobile;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 import com.sacarona.model.AbstractEntity;
 
+@Entity
 public class CellPhoneRegister extends AbstractEntity{
+	@SequenceGenerator(name="seq_cell_phone_register",
+			sequenceName="seq_cell_phone_register",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_cell_phone_register")
+	@Id
 	private Long id;
 	private Long userId;
 	private String regId;

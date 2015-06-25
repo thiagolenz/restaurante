@@ -11,5 +11,5 @@ public interface CountryDAO extends GenericDAO<Country> {
 	
 	ServiceCollectionResponse<Country> search (ServiceRequest<Country> request) throws UnknownHostException;
 	
-	Country findByIsoCode (String code) throws UnknownHostException;
+	Country findByIsoCode (String code);
 }

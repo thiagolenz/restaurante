@@ -3,31 +3,63 @@ package com.sacarona.model.order;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 import com.sacarona.model.AbstractEntity;
 import com.sacarona.model.world.City;
 import com.sacarona.model.world.Country;
 import com.sacarona.model.world.Province;
 
+@Entity
+@Table(name="orders")
 public class Order extends AbstractEntity {
+	@SequenceGenerator(name="seq_order",
+			sequenceName="seq_order",
+			allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	generator="seq_order")
+	@Id
 	private Long id;
 	private String productName;
 	private String productBrand;
 	private String productPrice;
 	private String productDescription;
 	private String productImageBase64;
+	
+	@ManyToOne
+	@JoinColumn(name = "country_destiny_id")
 	private Country countryDestiny;
+	
+	@ManyToOne
+	@JoinColumn(name = "province_destiny_id")
 	private Province provinceDestiny;
+	
+	@ManyToOne
+	@JoinColumn(name = "city_destiny_id")
 	private City cityDestiny;
 	private Date wishDeliveryDate;
+
+	@ManyToOne
+	@JoinColumn(name = "country_origin_id")
 	private Country countryOrigin;
 	private BigDecimal bonus;
 	private Long userId;
 	private Date createDate;
 	
+	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
 	
 	public Order() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public Order(Long id) {

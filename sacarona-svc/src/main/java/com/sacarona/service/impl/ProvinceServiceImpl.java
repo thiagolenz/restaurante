@@ -18,20 +18,16 @@ import com.sacarona.service.ProvinceService;
 public class ProvinceServiceImpl implements ProvinceService {
 	@Autowired
 	private ProvinceDAO provinceDAO;
-	
+
 	@Transactional
 	public void insertOrUpdate(List<Province> provinces) throws BusinessException {
-		try {
-			for (Province province : provinces) {
-				System.out.println(province);
-				Province existent = provinceDAO.findByAbbreviationAndCountry(province.getAbbreviation(), province.getCountryId());
-				if (existent == null)
-					provinceDAO.insert(province);
-				else 
-					provinceDAO.update(province, existent.getId());
-			}
-		} catch (UnknownHostException e) {
-			throw new BusinessException(e);
+		for (Province province : provinces) {
+			System.out.println(province);
+			Province existent = provinceDAO.findByAbbreviationAndCountry(province.getAbbreviation(), province.getCountryId());
+			if (existent == null)
+				provinceDAO.insert(province);
+			else 
+				provinceDAO.update(province, existent.getId());
 		}
 	}
 
