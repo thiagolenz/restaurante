@@ -3,6 +3,7 @@ package com.sacarona.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,5 +33,11 @@ public class ProvinceController {
 	public ServiceCollectionResponse<Province> search (@RequestBody Province province) throws BusinessException {
 		ServiceRequest<Province> request = requestFactory.createServiceRequest(province, requestContext);
 		return provinceService.search(request);
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Province findById (@PathVariable Long id) {
+		return provinceService.findById(id);
 	}
 }

@@ -16,6 +16,7 @@
        	<class>com.sacarona.model.order.Order</class>
        	<class>com.sacarona.model.travel.Travel</class>
        	<class>com.sacarona.model.dealing.Dealing</class>
+       	<class>com.sacarona.model.world.Location</class>
         <properties>
             <property name="hibernate.archive.autodetection" value="class, hbm"/>
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

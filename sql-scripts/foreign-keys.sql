@@ -47,4 +47,3 @@ ALTER TABLE Dealing ADD FOREIGN KEY (travel_id) REFERENCES travel(id);
 
 
 
-

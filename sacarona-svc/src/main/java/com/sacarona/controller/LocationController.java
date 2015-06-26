@@ -3,7 +3,6 @@ package com.sacarona.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,32 +13,25 @@ import com.sacarona.common.svc.controller.ServiceRequestFactory;
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
-import com.sacarona.model.world.Country;
-import com.sacarona.service.CountryService;
+import com.sacarona.model.world.Location;
+import com.sacarona.service.LocationService;
 
 @Controller
-@RequestMapping(value="/country",produces=MediaType.APPLICATION_JSON_VALUE)
-public class CountryController {
+@RequestMapping(value="/location",produces=MediaType.APPLICATION_JSON_VALUE)
+public class LocationController {
 	
 	private RequestContext requestContext;
 	
 	@Autowired
-	private ServiceRequestFactory<Country> requestFactory;
+	private ServiceRequestFactory<Location> requestFactory;
 	
 	@Autowired
-	private CountryService countryService;
+	private LocationService locationService;
 	
 	@RequestMapping(value="/search", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ServiceCollectionResponse<Country> search (@RequestBody Country country) throws BusinessException {
-		ServiceRequest<Country> request = requestFactory.createServiceRequest(country, requestContext);
-		return countryService.search(request);
-	}
-	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public Country findById (@PathVariable Long id) {
-		return countryService.findById(id);
+	public ServiceCollectionResponse<Location> search (@RequestBody Location location) throws BusinessException {
+		ServiceRequest<Location> request = requestFactory.createServiceRequest(location, requestContext);
+		return locationService.search(request);
 	}
 }
-

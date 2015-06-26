@@ -39,4 +39,9 @@ public class ProvinceServiceImpl implements ProvinceService {
 			throw new BusinessException(e);
 		}
 	}
+	
+	@Transactional
+	public Province findById(Long id) {
+		return provinceDAO.findById(Province.class, id);
+	}
 }

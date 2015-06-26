@@ -41,4 +41,9 @@ public class CityServiceImpl implements CityService {
 			throw new BusinessException(e);
 		}
 	}
+	
+	@Transactional
+	public City findById(Long id) {
+		return cityDAO.findById(City.class, id);
+	}
 }

@@ -11,4 +11,6 @@ public interface CountryService {
 	void insertOrUpdate(List<Country> list) throws BusinessException;
 
 	ServiceCollectionResponse<Country> search (ServiceRequest<Country> request) throws BusinessException;
+
+	Country findById(Long id);
 }

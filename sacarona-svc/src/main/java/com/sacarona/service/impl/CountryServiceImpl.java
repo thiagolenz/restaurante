@@ -46,5 +46,9 @@ public class CountryServiceImpl implements CountryService {
 		}
 	}
 
+	@Transactional
+	public Country findById(Long id) {
+		return countryDAO.findById(Country.class, id);
+	}
 
 }

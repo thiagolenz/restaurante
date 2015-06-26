@@ -11,4 +11,6 @@ public interface ProvinceService {
 	void insertOrUpdate (List<Province> provinces) throws BusinessException;
 	
 	ServiceCollectionResponse<Province> search (ServiceRequest<Province> request) throws BusinessException;
+
+	Province findById(Long id);
 }

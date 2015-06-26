@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +39,11 @@ public class CityController {
 		return cityService.search(request);
 	}
 	
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public City findById (@PathVariable Long id) {
+		return cityService.findById(id);
+	}
 	
 	@RequestMapping(value="/insert", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
