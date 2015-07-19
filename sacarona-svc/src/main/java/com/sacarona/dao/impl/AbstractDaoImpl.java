@@ -19,6 +19,7 @@ import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.GenericDAO;
 import com.sacarona.model.AbstractEntity;
 
+@Deprecated
 public abstract class AbstractDaoImpl <T extends AbstractEntity> implements GenericDAO <T>{
 	@Value("${mongodb.host}" )
 	protected String mongodbHost;

@@ -155,4 +155,14 @@ create table Location (
 );	
 
 
+create table Receipt (
+	id bigint NOT NULL,
+	userId bigint not null,
+	description varchar (255) not null,
+	lastCreditCardNumbers varchar (30) not null,
+	value numeric (8,2) not null,
+	paymentControl varchar (100) not null,
+	paymentDate timestamp not null
+);
+
 

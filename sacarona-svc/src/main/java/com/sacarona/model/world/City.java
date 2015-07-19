@@ -42,6 +42,8 @@ public class City extends AbstractEntity{
 		this.id = id;
 	}
 	public String getName() {
+		if (name == null)
+			name = "";
 		return name;
 	}
 	public void setName(String name) {

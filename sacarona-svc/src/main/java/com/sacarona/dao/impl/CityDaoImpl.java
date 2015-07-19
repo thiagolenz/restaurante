@@ -1,6 +1,8 @@
 package com.sacarona.dao.impl;
 
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.TypedQuery;
 
@@ -30,9 +32,20 @@ public class CityDaoImpl extends AbstractJpaDaoImpl<City> implements CityDAO {
 
 	@Override
 	public ServiceCollectionResponse<City> search(ServiceRequest<City> request) throws UnknownHostException {
-		TypedQuery<City> query = em.createQuery("from City o where o.name like :name order by o.name", City.class);
-		query.setParameter("name", request.getEntity().getName() + "%");
+		
+		StringBuilder builder = new StringBuilder("from City o where lower(o.name) like :name");
+		City city = request.getEntity();
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("name", city.getName().toLowerCase() + "%");
+		if (city.getCountryIso() != null){
+			builder.append(" and o.countryIso =:iso and o.provinceAbbreviation = :province");
+			parameters.put("iso", city.getCountryIso());
+			parameters.put("province", city.getProvinceAbbreviation());
+		}
+			
+		builder.append(" order by o.name");
 
+		TypedQuery<City> query = createQueryAndSetParams(builder, parameters, City.class);
 		ServiceCollectionResponse<City> result = executeQueryForPagination(query, request);
 		for (City cityTemp : result.getDataList()) {
 			cityTemp.setCompleteName(cityTemp.getName() + " "+ cityTemp.getProvinceAbbreviation());

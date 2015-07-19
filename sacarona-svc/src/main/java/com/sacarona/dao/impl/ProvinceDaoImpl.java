@@ -1,6 +1,8 @@
 package com.sacarona.dao.impl;
 
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.TypedQuery;
 
@@ -29,8 +31,17 @@ public class ProvinceDaoImpl extends AbstractJpaDaoImpl<Province> implements Pro
 	@Override
 	public ServiceCollectionResponse<Province> search(ServiceRequest<Province> request) throws UnknownHostException {
 		Province province = request.getEntity();
-		TypedQuery<Province> query = em.createQuery("from Province o where o.name like :name ", Province.class);
-		query.setParameter("name", province.getName() + "%");
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		StringBuilder builder = new StringBuilder("from Province o where lower(o.name) like :name ");
+		parameters.put("name", province.getName().toLowerCase() + "%");
+		
+		if (province.getCountryId() != null) {
+			builder.append(" and o.countryId = :countryId");
+			parameters.put("countryId", province.getCountryId());
+		}
+		builder.append(" order by o.name ASC");
+		
+		TypedQuery<Province> query = createQueryAndSetParams(builder, parameters, Province.class);
 
 		ServiceCollectionResponse<Province> result = executeQueryForPagination(query, request);
 		for (Province provinceTemp : result.getDataList()) {
