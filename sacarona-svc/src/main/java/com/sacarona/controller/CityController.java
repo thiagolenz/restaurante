@@ -18,6 +18,7 @@ import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.model.world.City;
+import com.sacarona.model.world.Country;
 import com.sacarona.service.CityService;
 
 @Controller
@@ -54,6 +55,12 @@ public class CityController {
 			cityService.insertOrUpdate(city2);
 		}
 		return city;
+	}
+	
+	@RequestMapping(value="/getCountryByCity", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Country getCountryByCity (@RequestBody City city) {
+		return cityService.getCountryByCity(city);
 	}
 	
 

@@ -10,13 +10,17 @@ import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.CityDAO;
+import com.sacarona.dao.CountryDAO;
 import com.sacarona.model.world.City;
+import com.sacarona.model.world.Country;
 import com.sacarona.service.CityService;
 
 @Service
 public class CityServiceImpl implements CityService {
 	@Autowired
 	private CityDAO cityDAO;
+	
+	@Autowired private CountryDAO countryDAO;
 	
 	@Transactional
 	public void insertOrUpdate (City city) throws BusinessException {
@@ -45,5 +49,10 @@ public class CityServiceImpl implements CityService {
 	@Transactional
 	public City findById(Long id) {
 		return cityDAO.findById(City.class, id);
+	}
+	
+	@Transactional
+	public Country getCountryByCity(City city) {
+		return countryDAO.findByIsoCode(city.getCountryIso());
 	}
 }
