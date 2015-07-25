@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
@@ -17,16 +18,17 @@ import com.sacarona.service.NotifyMobileService;
 
 @Service
 public class NotifyMobileServiceImpl implements NotifyMobileService {
-	private static final String GOOGLE_SERVER_KEY = "AIzaSyBOV1p4_eCqLqDTdS_rtha9yCTGCsTAO88";
+	private static final String GOOGLE_SERVER_KEY = "AIzaSyBiHlkZBX5jCadjXkADp10533RS0EDzSTc";
 
 	@Autowired private CellPhoneRegisterDAO cellPhoneRegisterDAO;
 
-	public void notify(String message, Long userId) throws BusinessException {
+	@Transactional
+	public void notify(String groupMessage, String message, Long userId) throws BusinessException {
 		try {
 			List<CellPhoneRegister> registers = cellPhoneRegisterDAO.findByUser(userId);
 
 			for (CellPhoneRegister cellPhoneRegister : registers) {
-				send(cellPhoneRegister, message);
+				send(cellPhoneRegister, message, groupMessage);
 			}
 		}
 		catch (UnknownHostException e) {
@@ -37,12 +39,12 @@ public class NotifyMobileServiceImpl implements NotifyMobileService {
 
 	}
 
-	public void send(CellPhoneRegister bean, String messageAll) throws IOException {
+	public void send(CellPhoneRegister bean, String messageAll, String group) throws IOException {
 		Sender sender = new Sender(GOOGLE_SERVER_KEY);
 		Message message = new Message.Builder()
-		.timeToLive(2419200)
-		.delayWhileIdle(false)
-		.addData("DEFAULT", messageAll).build();
+											.timeToLive(2419200)
+											.delayWhileIdle(false)
+											.addData(group, messageAll).build();
 
 		Result result = sender.send(message, bean.getRegId(), 1);
 		System.out.println(result);

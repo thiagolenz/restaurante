@@ -1,5 +1,7 @@
 package com.sacarona.model.user;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 import com.sacarona.model.AbstractEntity;
 import com.sacarona.model.world.City;
@@ -51,6 +54,11 @@ public class UserProfile extends AbstractEntity {
 	private String googleUrl;
 	private String twitterUrl;
 	private String linkedinUrl;
+	
+	private Date createDate;
+	
+	@Transient
+	private User user;
 	
 	public Long getId() {
 		return id;
@@ -169,5 +177,21 @@ public class UserProfile extends AbstractEntity {
 	}
 	public void setLinkedinUrl(String linkedinUrl) {
 		this.linkedinUrl = linkedinUrl;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public Date getCreateDate() {
+		return createDate;
+	}
+	
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 }

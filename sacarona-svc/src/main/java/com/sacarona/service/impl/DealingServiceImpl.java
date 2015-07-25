@@ -13,20 +13,31 @@ import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.dao.DealingDAO;
 import com.sacarona.model.dealing.Dealing;
 import com.sacarona.service.DealingService;
+import com.sacarona.service.NotifyMobileService;
 
 @Service
 public class DealingServiceImpl implements DealingService {
 	@Autowired private DealingDAO dealingDAO;
-
+	private static final String GROUP_NAME = "DEALING";
+	private static final String MESSAGE_NEW_DEALING = "sacarona.notification.newdealing";
+	private static final String MESSAGE_DEALING_UPDATE = "sacarona.notification.dealingupdate";
+	
+	@Autowired
+	private NotifyMobileService mobileService;
+	
 	@Transactional
-	public Dealing insert(Dealing dealing) {
+	public Dealing insert(Dealing dealing) throws BusinessException {
 		dealing.setCreateDate(new Date());
+		mobileService.notify(GROUP_NAME, MESSAGE_NEW_DEALING, dealing.getOrderUser().getId());
+		mobileService.notify(GROUP_NAME, MESSAGE_NEW_DEALING, dealing.getTravelerUser().getId());
 		return dealingDAO.insert(dealing);
 	}
 
 	@Transactional
-	public Dealing update(Dealing dealing, Long id) {
+	public Dealing update(Dealing dealing, Long id) throws BusinessException {
 		dealingDAO.update(dealing, id);
+		mobileService.notify(GROUP_NAME, MESSAGE_DEALING_UPDATE, dealing.getOrderUser().getId());
+		mobileService.notify(GROUP_NAME, MESSAGE_DEALING_UPDATE, dealing.getTravelerUser().getId());
 		return dealing;
 	}
 

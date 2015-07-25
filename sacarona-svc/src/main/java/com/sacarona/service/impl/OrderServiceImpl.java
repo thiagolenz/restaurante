@@ -33,19 +33,17 @@ public class OrderServiceImpl implements OrderService {
 	public Order insert(Order order) {
 		order.setCreateDate(new Date());
 		order.setOrderStatus(OrderStatus.OPEN);
-		fillCountryAndProvince(order);
 		return orderDAO.insert(order);
 	}
 
 	@Transactional
 	public Order update(Order order, Long id) {
 		orderDAO.update(order, id);
-		fillCountryAndProvince(order);
 		return order;
 	}
 	
 
-	private void fillCountryAndProvince (Order order) {
+	public void fillCountryAndProvince (Order order) {
 		City city = cityDAO.findById(City.class, order.getCityDestiny().getId());
 		Country country = countryDAO.findByIsoCode(city.getCountryIso());
 		Province province = provinceDAO.findByAbbreviationAndCountry(city.getProvinceAbbreviation(), country.getExternalId());

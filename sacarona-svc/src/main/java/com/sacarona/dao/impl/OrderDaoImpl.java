@@ -53,7 +53,7 @@ public class OrderDaoImpl extends AbstractJpaDaoImpl<Order> implements OrderDAO 
 		addProvinceDestinyWhereClause(request, strQuery, params, entity);
 		addCountryDestinyWhereClause(request, strQuery, params, entity);
 		
-		params.put("orderStatus", OrderStatus.OPEN.toString());
+		params.put("orderStatus", OrderStatus.OPEN);
 		
 		TypedQuery<Order> query = createQueryAndSetParams(strQuery, params, Order.class);
 

@@ -28,13 +28,13 @@ public class DealingController {
 	
 	@RequestMapping(value="/", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Dealing create (@RequestBody Dealing dealing) {
+	public Dealing create (@RequestBody Dealing dealing) throws BusinessException {
 		return dealingService.insert(dealing);
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Dealing update (@RequestBody Dealing dealing, @PathVariable("id") Long id) {
+	public Dealing update (@RequestBody Dealing dealing, @PathVariable("id") Long id) throws BusinessException {
 		return dealingService.update(dealing, id);
 	}
 	

@@ -165,4 +165,8 @@ create table Receipt (
 	paymentDate timestamp not null
 );
 
-
+create table UserAvatar (
+	id bigint NOT NULL,
+	userId bigint not null,
+	avatarBase64 text not null
+);

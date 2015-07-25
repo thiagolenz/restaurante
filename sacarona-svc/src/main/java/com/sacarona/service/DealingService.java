@@ -6,8 +6,8 @@ import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.model.dealing.Dealing;
 
 public interface DealingService {
-	Dealing insert (Dealing dealing);
-	Dealing update (Dealing dealing, Long id);
+	Dealing insert (Dealing dealing) throws BusinessException;
+	Dealing update (Dealing dealing, Long id) throws BusinessException;
 	ServiceCollectionResponse<Dealing> findByUser (ServiceRequest<Dealing> request) throws BusinessException;
 	void remove (Long dealingId);
 }

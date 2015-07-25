@@ -5,6 +5,7 @@
         <jta-data-source>java:/sacaronaDS</jta-data-source>
         <class>com.sacarona.model.user.User</class>
         <class>com.sacarona.model.user.UserProfile</class>
+        <class>com.sacarona.model.user.UserAvatar</class>
         <class>com.sacarona.model.mobile.AppUserAuth</class>
         <class>com.sacarona.model.mobile.CellPhoneRegister</class>
        	<class>com.sacarona.model.world.City</class>
