@@ -15,6 +15,7 @@
        	<class>com.sacarona.model.feedback.FeedbackAverage</class>
        	<class>com.sacarona.model.track.LocationTrack</class>
        	<class>com.sacarona.model.order.Order</class>
+       	<class>com.sacarona.model.order.OrderAvatar</class>
        	<class>com.sacarona.model.travel.Travel</class>
        	<class>com.sacarona.model.dealing.Dealing</class>
        	<class>com.sacarona.model.world.Location</class>

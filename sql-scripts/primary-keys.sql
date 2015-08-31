@@ -19,6 +19,8 @@ ALTER TABLE Receipt ADD CONSTRAINT Receipt_pk PRIMARY KEY (id);
 
 ALTER TABLE UserAvatar ADD CONSTRAINT UserAvatar_pk PRIMARY KEY (id);
 
+ALTER TABLE OrderAvatar ADD CONSTRAINT OrderAvatar_pk PRIMARY KEY (id);
+
 
 
 

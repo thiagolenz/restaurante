@@ -43,7 +43,7 @@ public class CityController {
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public City findById (@PathVariable Long id) {
-		return cityService.findById(id);
+		return cityService.findById(id, requestContext.getUser().getLang());
 	}
 	
 	@RequestMapping(value="/insert", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)

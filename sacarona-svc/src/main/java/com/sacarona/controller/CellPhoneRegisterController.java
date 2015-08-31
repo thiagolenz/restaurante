@@ -3,6 +3,7 @@ package com.sacarona.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,13 @@ public class CellPhoneRegisterController {
 	@ResponseBody
 	public Response testNotification () throws BusinessException {
 		mobileService.notify("TEST", "sacarona.notification.testconnection", requestContext.getUser().getId());
+		return Response.newSuccessResponse();
+	}
+	
+	@RequestMapping(value="/sendNotification/{title}/{message}", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Response sendNotification (@PathVariable ("title") String title, @PathVariable ("message") String message ) throws BusinessException {
+		mobileService.notify(title, message, requestContext.getUser().getId());
 		return Response.newSuccessResponse();
 	}
 	

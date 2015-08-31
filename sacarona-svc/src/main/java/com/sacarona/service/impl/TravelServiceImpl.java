@@ -11,13 +11,19 @@ import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
 import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.controller.request.SearchTravelersRequest;
+import com.sacarona.dao.FeedbackAverageDAO;
 import com.sacarona.dao.TravelDAO;
+import com.sacarona.dao.UserDAO;
+import com.sacarona.model.feedback.FeedbackAverage;
 import com.sacarona.model.travel.Travel;
+import com.sacarona.model.user.User;
 import com.sacarona.service.TravelService;
 
 @Service
 public class TravelServiceImpl implements TravelService {
 	@Autowired private TravelDAO travelDAO;
+	@Autowired private UserDAO userDAO;
+	@Autowired private FeedbackAverageDAO averageDAO;
 
 	@Transactional
 	public Travel insert(Travel travel) {
@@ -43,7 +49,14 @@ public class TravelServiceImpl implements TravelService {
 	@Transactional
 	public ServiceCollectionResponse<Travel> findTravelers(SearchTravelersRequest request) throws BusinessException {
 		try {
-			return travelDAO.findTravelers(request);
+			ServiceCollectionResponse<Travel> result = travelDAO.findTravelers(request);
+			for (Travel travel : result.getDataList()) {
+				travel.setUserName(userDAO.findById(User.class, travel.getUserId()).getName());
+				FeedbackAverage average = averageDAO.findByUser(travel.getUserId());
+				if (average != null)
+					travel.setScore(average.getAverageValue());
+			}
+			return result;
 		} catch (UnknownHostException e) {
 			throw new BusinessException(e);
 		}

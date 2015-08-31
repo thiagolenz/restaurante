@@ -1,5 +1,6 @@
 package com.sacarona.model.travel;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 import com.sacarona.model.AbstractEntity;
 import com.sacarona.model.world.City;
@@ -57,6 +59,11 @@ public class Travel extends AbstractEntity {
 	
 	private Date createDate;
 	private Long userId;
+	
+	@Transient
+	private String userName;
+	@Transient
+	private BigDecimal score;
 	
 	public Travel() {
 		// TODO Auto-generated constructor stub
@@ -150,5 +157,20 @@ public class Travel extends AbstractEntity {
 	public void setProvinceOrigin(Province provinceOrigin) {
 		this.provinceOrigin = provinceOrigin;
 	}
-	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public BigDecimal getScore() {
+		return score;
+	}
+
+	public void setScore(BigDecimal score) {
+		this.score = score;
+	}	
 }

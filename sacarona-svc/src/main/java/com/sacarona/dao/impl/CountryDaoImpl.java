@@ -35,15 +35,15 @@ public class CountryDaoImpl extends AbstractJpaDaoImpl<Country> implements Count
 
 	private void addNameQueryParam(ServiceRequest<Country> request, StringBuilder builder, String name, Map<String, String> params) {
 		String lang = request.getUser().getLang(); 
-		params.put("name", name + "%");
+		params.put("name", name.toLowerCase() + "%");
 		if (lang == null)
 			lang = "en-US";
 		if (lang.equals("en-US")) {
-			builder.append(" o.nameEnglish like :name order by o.nameEnglish");
+			builder.append(" lower(o.nameEnglish) like :name order by o.nameEnglish");
 		} else if (lang.equals("es")) {
-			builder.append(" o.nameSpanish like :name order by o.nameSpanish");
+			builder.append(" lower(o.nameSpanish) like :name order by o.nameSpanish");
 		} else { 
-			builder.append(" o.namePortuguese like :name order by o.namePortuguese");
+			builder.append(" lower(o.namePortuguese) like :name order by o.namePortuguese");
 		}
 	}
 	

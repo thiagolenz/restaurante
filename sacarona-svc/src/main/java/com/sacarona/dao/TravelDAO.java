@@ -12,5 +12,5 @@ public interface TravelDAO extends GenericDAO<Travel> {
 	
 	ServiceCollectionResponse<Travel> findTravelers(SearchTravelersRequest request) throws UnknownHostException;
 	
-	Travel findDetail(Long id);
+	Travel findDetail(Long id, String lang);
 }

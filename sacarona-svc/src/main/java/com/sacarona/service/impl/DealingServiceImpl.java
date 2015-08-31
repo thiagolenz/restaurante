@@ -54,5 +54,11 @@ public class DealingServiceImpl implements DealingService {
 	public void remove(Long dealingId) {
 		dealingDAO.remove(dealingDAO.findById(Dealing.class, dealingId));
 	}
+	
+	@Transactional
+	public boolean existDealingFinished(Dealing dealing) {
+		Dealing result = dealingDAO.findDealingFinished(dealing);
+		return result != null;
+	}
 
 }

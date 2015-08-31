@@ -10,4 +10,6 @@ public interface DealingService {
 	Dealing update (Dealing dealing, Long id) throws BusinessException;
 	ServiceCollectionResponse<Dealing> findByUser (ServiceRequest<Dealing> request) throws BusinessException;
 	void remove (Long dealingId);
+	
+	boolean existDealingFinished (Dealing dealing);
 }

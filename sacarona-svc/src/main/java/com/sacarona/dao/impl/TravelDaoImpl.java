@@ -32,12 +32,15 @@ public class TravelDaoImpl extends AbstractJpaDaoImpl<Travel> implements TravelD
 		TypedQuery<Travel> query = 
 				em.createQuery("from Travel o where o.userId = :userId order by o.createDate DESC", Travel.class);
 		query.setParameter("userId", request.getEntity().getUserId());
-		return executeQueryForPagination(query, request);
+		ServiceCollectionResponse<Travel> result = executeQueryForPagination(query, request);
+		completeCityName(request, result);
+		return result;
 	}
 	
-	
-	public Travel findDetail(Long id) {
-		return findById(Travel.class, id);
+	public Travel findDetail(Long id, String lang) {
+		Travel result = findById(Travel.class, id);
+		completeTravelCitiesName (result, lang);
+		return result;
 	}
 	
 	
@@ -46,44 +49,73 @@ public class TravelDaoImpl extends AbstractJpaDaoImpl<Travel> implements TravelD
 		StringBuilder strQuery = new StringBuilder("from Travel o where o.canceled is false and o.departureDate >= :departureDate ");
 		Travel entity = request.getRequest().getEntity();
 		
-		addCountryOriginWhereClause(strQuery, params, entity);
-		addCityDestinyWhereClause(request, strQuery, params, entity);
-		addProvinceDestinyWhereClause(request, strQuery, params, entity);
+		boolean addCountryOriginWhereClause = addCountryOriginWhereClause(strQuery, params, entity);
+		boolean addCityDestinyWhereClause = addCityDestinyWhereClause(request, strQuery, params, entity);
+		boolean addProvinceDestinyWhereClause = addProvinceDestinyWhereClause(request, strQuery, params, entity);
 		
-		addCountryDestinyWhereClause(request, strQuery, params, entity);
+		boolean addCountryDestinyWhereClause = addCountryDestinyWhereClause(request, strQuery, params, entity);
+		
 		params.put("departureDate", new Date());
 		
-		strQuery.append(" order by o.departureDate DESC");
+		if (addCountryOriginWhereClause || addCityDestinyWhereClause || addProvinceDestinyWhereClause || addCountryDestinyWhereClause)
+			strQuery.append(" order by o.departureDate DESC");
+		else
+			strQuery.append(" order by o.id DESC");
+		
 		TypedQuery<Travel> query = createQueryAndSetParams(strQuery, params, Travel.class);
-		return executeQueryForPagination(query, request.getRequest());
+		
+		ServiceCollectionResponse<Travel> result = executeQueryForPagination(query, request.getRequest());
+		completeCityName(request.getRequest(), result);
+		return result;
 	}
 	
-	private void addCountryOriginWhereClause(StringBuilder query, Map<String, Object> params, Travel entity) {
+	private void completeCityName(ServiceRequest<Travel> request, ServiceCollectionResponse<Travel> result) {
+		for (Travel travel : result.getDataList()) {
+			completeTravelCitiesName(travel, request.getUser().getLang());
+		}
+	}
+	
+	private void completeTravelCitiesName (Travel travel, String lang) {
+		cityDAO.completeTheName(travel.getCityDestiny(), lang);
+		cityDAO.completeTheName(travel.getCityOrigin(), lang);
+	}
+	
+	
+	private boolean addCountryOriginWhereClause(StringBuilder query, Map<String, Object> params, Travel entity) {
 		if (entity.getCountryOrigin() != null) {
 			params.put("countryOrigin", entity.getCountryOrigin());
 			query.append(" and o.countryOrigin = :countryOrigin");
+			return true;
 		}
+		return false;
 	}
 
-	private void addCityDestinyWhereClause(SearchTravelersRequest request, StringBuilder query, Map<String, Object> params, Travel entity) {
+	private boolean addCityDestinyWhereClause(SearchTravelersRequest request, StringBuilder query, Map<String, Object> params, Travel entity) {
 		if (request.getLocationType() == SearchLocationType.CITY && entity.getCityDestiny() != null) {
 			params.put("cityDestiny", entity.getCityDestiny());
 			query.append(" and o.cityDestiny = :cityDestiny");
+			return true;
 		}
+		return false;
 	}
 	
-	private void addProvinceDestinyWhereClause(SearchTravelersRequest request, StringBuilder query, Map<String, Object> params, Travel entity) {
+	private boolean addProvinceDestinyWhereClause(SearchTravelersRequest request, StringBuilder query, Map<String, Object> params, Travel entity) {
 		if (request.getLocationType() == SearchLocationType.PROVINCE && entity.getProvinceDestiny() != null) {
 			params.put("provinceDestiny", entity.getProvinceDestiny());
 			query.append(" and o.provinceDestiny = :provinceDestiny");
+			return true;
 		}
+		return false;
 	}
 
-	private void addCountryDestinyWhereClause(SearchTravelersRequest request,  StringBuilder query, Map<String, Object> params, Travel entity) {
+	private boolean addCountryDestinyWhereClause(SearchTravelersRequest request,  StringBuilder query, Map<String, Object> params, Travel entity) {
 		if (request.getLocationType() == SearchLocationType.COUNTRY && entity.getCountryDestiny() != null) {
 			params.put("countryDestiny", entity.getCountryDestiny());
 			query.append(" and o.countryDestiny = :countryDestiny");
+			return true;
 		}
+		return false;
 	}
 
 }
+

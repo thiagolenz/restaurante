@@ -170,3 +170,9 @@ create table UserAvatar (
 	userId bigint not null,
 	avatarBase64 text not null
 );
+
+create table OrderAvatar (
+	id bigint NOT NULL,
+	orderId bigint not null,
+	avatarBase64 text not null
+);

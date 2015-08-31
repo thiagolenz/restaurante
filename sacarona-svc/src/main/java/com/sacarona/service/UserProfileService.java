@@ -8,5 +8,5 @@ public interface UserProfileService {
 	
 	UserProfile update (UserProfile userProfile, Long id);
 	
-	UserProfile findByUserId (Long id) throws BusinessException;
+	UserProfile findByUserId (Long id,  String lang) throws BusinessException;
 }

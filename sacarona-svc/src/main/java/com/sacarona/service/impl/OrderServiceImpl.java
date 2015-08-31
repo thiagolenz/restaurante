@@ -13,10 +13,16 @@ import com.sacarona.common.svc.io.ServiceRequest;
 import com.sacarona.controller.request.SearchOrdersRequest;
 import com.sacarona.dao.CityDAO;
 import com.sacarona.dao.CountryDAO;
+import com.sacarona.dao.FeedbackAverageDAO;
+import com.sacarona.dao.OrderAvatarDAO;
 import com.sacarona.dao.OrderDAO;
 import com.sacarona.dao.ProvinceDAO;
+import com.sacarona.dao.UserDAO;
+import com.sacarona.model.feedback.FeedbackAverage;
 import com.sacarona.model.order.Order;
+import com.sacarona.model.order.OrderAvatar;
 import com.sacarona.model.order.OrderStatus;
+import com.sacarona.model.user.User;
 import com.sacarona.model.world.City;
 import com.sacarona.model.world.Country;
 import com.sacarona.model.world.Province;
@@ -28,6 +34,11 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired private CountryDAO countryDAO;
 	@Autowired private ProvinceDAO provinceDAO;
 	@Autowired private CityDAO cityDAO;
+	
+	@Autowired private UserDAO userDAO;
+	@Autowired private FeedbackAverageDAO averageDAO;
+	
+	@Autowired private OrderAvatarDAO avatarDAO;
 
 	@Transactional
 	public Order insert(Order order) {
@@ -53,6 +64,8 @@ public class OrderServiceImpl implements OrderService {
 
 	@Transactional
 	public void remove(Long orderId) {
+		OrderAvatar avatar = avatarDAO.findByOrderId(orderId);
+		avatarDAO.remove(avatar);
 		orderDAO.remove(orderDAO.findById(Order.class, orderId));
 	}
 
@@ -68,7 +81,14 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	public ServiceCollectionResponse<Order> findOrders(SearchOrdersRequest request) throws BusinessException {
 		try {
-			return orderDAO.findOrders(request);
+			ServiceCollectionResponse<Order> result = orderDAO.findOrders(request);
+			for (Order order : result.getDataList()) {
+				order.setUserName(userDAO.findById(User.class, order.getUserId()).getName());
+				FeedbackAverage average = averageDAO.findByUser(order.getUserId());
+				if (average != null)
+					order.setScore(average.getAverageValue());
+			}
+			return result;
 		} catch (UnknownHostException e) {
 			throw new BusinessException(e);
 		}

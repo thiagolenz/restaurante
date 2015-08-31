@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.sacarona.model.AbstractEntity;
 import com.sacarona.model.world.City;
@@ -33,7 +34,6 @@ public class Order extends AbstractEntity {
 	private String productBrand;
 	private String productPrice;
 	private String productDescription;
-	private String productImageBase64;
 	
 	@ManyToOne
 	@JoinColumn(name = "country_destiny_id")
@@ -57,6 +57,11 @@ public class Order extends AbstractEntity {
 	
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
+	
+	@Transient
+	private String userName;
+	@Transient
+	private BigDecimal score;
 	
 	public Order() {
 		
@@ -96,12 +101,6 @@ public class Order extends AbstractEntity {
 	}
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
-	}
-	public String getProductImageBase64() {
-		return productImageBase64;
-	}
-	public void setProductImageBase64(String productImageBase64) {
-		this.productImageBase64 = productImageBase64;
 	}
 	public Country getCountryDestiny() {
 		return countryDestiny;
@@ -161,4 +160,20 @@ public class Order extends AbstractEntity {
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public BigDecimal getScore() {
+		return score;
+	}
+
+	public void setScore(BigDecimal score) {
+		this.score = score;
+	}	
 }

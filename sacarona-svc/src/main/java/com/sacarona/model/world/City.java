@@ -24,6 +24,12 @@ public class City extends AbstractEntity{
 	private String provinceAbbreviation;
 	
 	@Transient
+	private Province province;
+	
+	@Transient
+	private Country country;
+	
+	@Transient
 	private String completeName;
 	
 	public City() {
@@ -76,6 +82,22 @@ public class City extends AbstractEntity{
 		this.completeName = completeName;
 	}
 	
+	public Province getProvince() {
+		return province;
+	}
+
+	public void setProvince(Province province) {
+		this.province = province;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
 	@Override
 	public String toString() {
 		return "City [id=" + id + ", name=" + name + ", code=" + code

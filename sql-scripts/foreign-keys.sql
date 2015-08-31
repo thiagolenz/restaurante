@@ -39,6 +39,8 @@ ALTER TABLE Dealing ADD FOREIGN KEY (travel_id) REFERENCES travel(id);
 ALTER TABLE Receipt ADD FOREIGN KEY (userId) REFERENCES users(id);
 
 ALTER TABLE UserAvatar ADD FOREIGN KEY (userId) REFERENCES users(id);
+ALTER TABLE OrderAvatar ADD FOREIGN KEY (orderid) REFERENCES orders(id);
+
 
 
 

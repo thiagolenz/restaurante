@@ -26,7 +26,7 @@ public class UserProfileController {
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Object getByUserId (@PathVariable("id") Long id) throws BusinessException {
-		UserProfile userProfile = userProfileService.findByUserId (id);
+		UserProfile userProfile = userProfileService.findByUserId (id, requestContext.getUser().getLang());
 		if (userProfile == null)
 			return Response.notFoundResponse();
 		return userProfile;

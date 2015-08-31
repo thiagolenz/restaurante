@@ -13,3 +13,8 @@ INNER JOIN COUNTRY co ON co.externalId = p.countryid;
 INSERT INTO LOCATION select  nextval('seq_location'), 'COUNTRY' AS TYPELOCATION , nameEnglish || ' (' || un || ')' as nameEnglish, 
 namePortuguese || ' (' || un || ')' as namePortuguese,
 nameSpanish || ' (' || un || ')' as nameSpanish, id from country;
+
+
+
+insert into OrderAvatar select nextval('seq_order_avatar'), id, productImageBase64 from Orders;
+

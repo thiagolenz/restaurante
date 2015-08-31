@@ -31,8 +31,8 @@ public class UserProfileServiceImpl implements UserProfileService {
 	}
 
 	@Transactional
-	public UserProfile findByUserId (Long id) throws BusinessException {
-		UserProfile userProfile = profileDAO.findByUserId(id);
+	public UserProfile findByUserId (Long id,  String lang) throws BusinessException {
+		UserProfile userProfile = profileDAO.findByUserId(id, lang);
 		if (userProfile != null)
 			userProfile.setUser(userDAO.findById(User.class, id));
 		return userProfile;

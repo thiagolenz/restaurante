@@ -8,4 +8,5 @@ import com.sacarona.model.dealing.Dealing;
 
 public interface DealingDAO extends GenericDAO<Dealing> {
 	ServiceCollectionResponse<Dealing> findByUser(ServiceRequest<Dealing> request) throws UnknownHostException;
+	Dealing findDealingFinished (Dealing dealing);
 }

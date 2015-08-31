@@ -12,5 +12,5 @@ public interface OrderDAO extends GenericDAO<Order> {
 	
 	ServiceCollectionResponse<Order> findOrders (SearchOrdersRequest request) throws UnknownHostException;
 	
-	Order findDetail(Long id) ;
+	Order findDetail(Long id, String lang) ;
 }

@@ -52,4 +52,13 @@ public class DealingController {
 		dealing.setTravelerUser(new User(id));
 		return dealingService.findByUser(requestFactory.createServiceRequest(dealing, requestContext));
 	}
+	
+	@RequestMapping(value="/existDealingFinished/{otherUserId}", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Response existDealingFinished (@PathVariable ("otherUserId") Long otherUserId) {
+		Dealing dealing = new Dealing();
+		dealing.setOrderUser(requestContext.getUser());
+		dealing.setTravelerUser(new User(otherUserId));
+		return Response.newBooleanResponse(dealingService.existDealingFinished(dealing));
+	}
 }

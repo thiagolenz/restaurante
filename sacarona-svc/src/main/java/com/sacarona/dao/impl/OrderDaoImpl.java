@@ -33,12 +33,16 @@ public class OrderDaoImpl extends AbstractJpaDaoImpl<Order> implements OrderDAO 
 		TypedQuery<Order> query = 
 				em.createQuery("from Order o where o.userId = :userId order by o.createDate DESC", Order.class);
 		query.setParameter("userId", request.getEntity().getUserId());
-		return executeQueryForPagination(query, request);
+		ServiceCollectionResponse<Order> result = executeQueryForPagination(query, request);
+		completeCityName(request, result);
+		return result;
 	}
 	
 	@Transactional
-	public Order findDetail(Long id) {
-		return findById(Order.class, id);
+	public Order findDetail(Long id, String lang) {
+		Order result = findById(Order.class, id);
+		completeCitiesName(result, lang);
+		return result;
 	}
 	
 	@Transactional
@@ -47,45 +51,70 @@ public class OrderDaoImpl extends AbstractJpaDaoImpl<Order> implements OrderDAO 
 		StringBuilder strQuery = new StringBuilder("from Order o where o.orderStatus = :orderStatus ");
 		Order entity = request.getRequest().getEntity();
 		
-		addCountryOriginWhereClause(strQuery, params, entity);
+		boolean addCountryOriginWhereClause = addCountryOriginWhereClause(strQuery, params, entity);
 		
-		addCityDestinyWhereClause(request, strQuery, params,  entity);
-		addProvinceDestinyWhereClause(request, strQuery, params, entity);
-		addCountryDestinyWhereClause(request, strQuery, params, entity);
+		boolean addCityDestinyWhereClause = addCityDestinyWhereClause(request, strQuery, params,  entity);
+		boolean addProvinceDestinyWhereClause = addProvinceDestinyWhereClause(request, strQuery, params, entity);
+		boolean addCountryDestinyWhereClause = addCountryDestinyWhereClause(request, strQuery, params, entity);
 		
 		params.put("orderStatus", OrderStatus.OPEN);
 		
+		if (addCountryOriginWhereClause || addCityDestinyWhereClause || addProvinceDestinyWhereClause || addCountryDestinyWhereClause)
+			strQuery.append(" order by o.createDate DESC");
+		else
+			strQuery.append(" order by o.id DESC");
+		
 		TypedQuery<Order> query = createQueryAndSetParams(strQuery, params, Order.class);
 
-		return executeQueryForPagination(query, request.getRequest());
+		ServiceCollectionResponse<Order> result = executeQueryForPagination(query, request.getRequest());
+		completeCityName(request.getRequest(), result);
+		return result;
 	}
-
-	private void addCountryOriginWhereClause(StringBuilder query, Map<String, Object> params, Order entity) {
-		if (entity.getCountryOrigin() != null) {
-			params.put("countryOrigin", entity.getCountryOrigin());
-			query.append(" and o.countryOrigin = :countryOrigin");
-		}
-	}
-
-	private void addCityDestinyWhereClause(SearchOrdersRequest request, StringBuilder query, Map<String, Object> params, Order entity) {
-		if (request.getLocationType() == SearchLocationType.CITY && entity.getCityDestiny() != null) {
-			params.put("cityDestiny", entity.getCityDestiny());
-			query.append(" and o.cityDestiny = :cityDestiny");
+	
+	private void completeCityName(ServiceRequest<Order> request, ServiceCollectionResponse<Order> result) {
+		for (Order order : result.getDataList()) {
+			completeCitiesName(order, request.getUser().getLang());
 		}
 	}
 	
-	private void addProvinceDestinyWhereClause(SearchOrdersRequest request, StringBuilder query, Map<String, Object> params, Order entity) {
+	private void completeCitiesName (Order order, String lang) {
+		cityDAO.completeTheName(order.getCityDestiny(), lang);
+	}
+
+	private boolean addCountryOriginWhereClause(StringBuilder query, Map<String, Object> params, Order entity) {
+		if (entity.getCountryOrigin() != null) {
+			params.put("countryOrigin", entity.getCountryOrigin());
+			query.append(" and o.countryOrigin = :countryOrigin");
+			return true;
+		}
+		return false;
+	}
+
+	private boolean addCityDestinyWhereClause(SearchOrdersRequest request, StringBuilder query, Map<String, Object> params, Order entity) {
+		if (request.getLocationType() == SearchLocationType.CITY && entity.getCityDestiny() != null) {
+			params.put("cityDestiny", entity.getCityDestiny());
+			query.append(" and o.cityDestiny = :cityDestiny");
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean addProvinceDestinyWhereClause(SearchOrdersRequest request, StringBuilder query, Map<String, Object> params, Order entity) {
 		if (request.getLocationType() == SearchLocationType.PROVINCE && entity.getProvinceDestiny() != null) {
 			params.put("provinceDestiny", entity.getProvinceDestiny());
 			query.append(" and o.provinceDestiny = :provinceDestiny");
+			return true;
 		}
+		return false;
 	}
 
-	private void addCountryDestinyWhereClause(SearchOrdersRequest request,  StringBuilder query, Map<String, Object> params, Order entity) {
+	private boolean addCountryDestinyWhereClause(SearchOrdersRequest request,  StringBuilder query, Map<String, Object> params, Order entity) {
 		if (request.getLocationType() == SearchLocationType.COUNTRY && entity.getCountryDestiny() != null) {
 			params.put("countryDestiny", entity.getCountryDestiny());
 			query.append(" and o.countryDestiny = :countryDestiny");
+			return true;
 		}
+		return false;
 	}
 
 }

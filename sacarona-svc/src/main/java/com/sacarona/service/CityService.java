@@ -10,7 +10,7 @@ public interface CityService {
 	void insertOrUpdate (City city) throws BusinessException;
 	ServiceCollectionResponse<City> search (ServiceRequest<City> request) throws BusinessException;
 	
-	City findById (Long id);
+	City findById (Long id, String lang);
 	
 	Country getCountryByCity (City city);
 }

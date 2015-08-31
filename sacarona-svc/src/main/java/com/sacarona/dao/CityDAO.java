@@ -10,4 +10,6 @@ public interface CityDAO extends GenericDAO<City> {
 	City findByCountryAndCode (String countryIso, String code) throws UnknownHostException;
 	
 	ServiceCollectionResponse<City> search (ServiceRequest<City> request) throws UnknownHostException;
+	
+	void completeTheName (City cityTemp, String lang);
 }

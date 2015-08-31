@@ -47,8 +47,10 @@ public class CityServiceImpl implements CityService {
 	}
 	
 	@Transactional
-	public City findById(Long id) {
-		return cityDAO.findById(City.class, id);
+	public City findById(Long id, String lang) {
+		City cityTemp = cityDAO.findById(City.class, id);
+		cityDAO.completeTheName(cityTemp, lang);
+		return cityTemp;
 	}
 	
 	@Transactional
