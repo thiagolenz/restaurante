@@ -34,5 +34,7 @@
 	<import resource="request-config.xml" />	
 	
 	<context:property-placeholder location="classpath*:configuration-general_${app.env}.properties" />
+	
+	<import resource="multipartresolver-config.xml" />
 
 </beans>

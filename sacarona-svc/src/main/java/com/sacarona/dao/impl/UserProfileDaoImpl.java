@@ -18,7 +18,8 @@ public class UserProfileDaoImpl extends AbstractJpaDaoImpl<UserProfile> implemen
 		TypedQuery<UserProfile> query = em.createQuery("from UserProfile o where o.userId = :userId ", UserProfile.class);
 		query.setParameter("userId", userId);
 		UserProfile result = singleQuery(query);
-		cityDao.completeTheName(result.getCity(), lang);
+		if (result != null)
+			cityDao.completeTheName(result.getCity(), lang);
 		return result;
 	}
 }

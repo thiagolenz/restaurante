@@ -31,7 +31,7 @@ public class OrderDaoImpl extends AbstractJpaDaoImpl<Order> implements OrderDAO 
 	@Transactional
 	public ServiceCollectionResponse<Order> findOrdersByUser(ServiceRequest<Order> request) throws UnknownHostException {
 		TypedQuery<Order> query = 
-				em.createQuery("from Order o where o.userId = :userId order by o.createDate DESC", Order.class);
+				em.createQuery("from Order o where o.userId = :userId and o.removed is false order by o.createDate DESC", Order.class);
 		query.setParameter("userId", request.getEntity().getUserId());
 		ServiceCollectionResponse<Order> result = executeQueryForPagination(query, request);
 		completeCityName(request, result);
@@ -49,6 +49,7 @@ public class OrderDaoImpl extends AbstractJpaDaoImpl<Order> implements OrderDAO 
 	public ServiceCollectionResponse<Order> findOrders(SearchOrdersRequest request) throws UnknownHostException {
 		Map<String, Object> params = new HashMap<>();
 		StringBuilder strQuery = new StringBuilder("from Order o where o.orderStatus = :orderStatus ");
+		strQuery.append(" and o.userId != :userId and o.removed is false ");
 		Order entity = request.getRequest().getEntity();
 		
 		boolean addCountryOriginWhereClause = addCountryOriginWhereClause(strQuery, params, entity);
@@ -58,6 +59,7 @@ public class OrderDaoImpl extends AbstractJpaDaoImpl<Order> implements OrderDAO 
 		boolean addCountryDestinyWhereClause = addCountryDestinyWhereClause(request, strQuery, params, entity);
 		
 		params.put("orderStatus", OrderStatus.OPEN);
+		params.put("userId", request.getRequest().getUser().getId());
 		
 		if (addCountryOriginWhereClause || addCityDestinyWhereClause || addProvinceDestinyWhereClause || addCountryDestinyWhereClause)
 			strQuery.append(" order by o.createDate DESC");

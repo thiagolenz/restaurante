@@ -20,7 +20,6 @@ import com.sacarona.dao.ProvinceDAO;
 import com.sacarona.dao.UserDAO;
 import com.sacarona.model.feedback.FeedbackAverage;
 import com.sacarona.model.order.Order;
-import com.sacarona.model.order.OrderAvatar;
 import com.sacarona.model.order.OrderStatus;
 import com.sacarona.model.user.User;
 import com.sacarona.model.world.City;
@@ -64,9 +63,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Transactional
 	public void remove(Long orderId) {
-		OrderAvatar avatar = avatarDAO.findByOrderId(orderId);
-		avatarDAO.remove(avatar);
-		orderDAO.remove(orderDAO.findById(Order.class, orderId));
+		Order order = orderDAO.findById(Order.class, orderId);
+		order.setRemoved(true);
+		orderDAO.update(order, orderId);
 	}
 
 	@Transactional

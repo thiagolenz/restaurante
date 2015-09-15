@@ -34,6 +34,10 @@ public class RequestTokenValidator {
 		String appToken = httpServletRequest.getHeader(Constants.APP_CLIENT_TOKEN);
 		String userToken = httpServletRequest.getHeader(Constants.USER_TOKEN);
 		
+		System.out.println("PUBLIC = " + publicToken);
+		System.out.println("APPTOKEN = " + appToken);
+		System.out.println("USERTOKEN = " + userToken);
+		
 		boolean isAuthorized = false;
 		
 		if (PUBLIC_TOKEN.equals(publicToken)) {

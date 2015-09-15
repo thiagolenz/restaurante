@@ -23,13 +23,7 @@ public class CountryServiceImpl implements CountryService {
 	@Transactional
 	public void insertOrUpdate(List<Country> list) throws BusinessException {
 		for (Country country : list) {
-			System.out.println("inserting " + country);
-			Country existent;
-			try {
-				existent = countryDAO.findByExternalId(country.getExternalId());
-			} catch (UnknownHostException e) {
-				throw new BusinessException(e);
-			}
+			Country existent = countryDAO.findByIsoCode(country.getIso());
 			if (existent == null)
 				countryDAO.insert(country);
 			else 

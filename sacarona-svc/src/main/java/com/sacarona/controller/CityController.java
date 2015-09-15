@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sacarona.common.context.RequestContext;
+import com.sacarona.common.response.Response;
 import com.sacarona.common.svc.controller.ServiceRequestFactory;
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.common.svc.io.ServiceCollectionResponse;
@@ -55,6 +56,15 @@ public class CityController {
 			cityService.insertOrUpdate(city2);
 		}
 		return city;
+	}
+	
+	@RequestMapping(value="/importAll", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Response importAll (@RequestBody List<City> cities) throws BusinessException {
+		for (City city : cities) {
+			cityService.insertOrUpdate(city);
+		}
+		return Response.newSuccessResponse();
 	}
 	
 	@RequestMapping(value="/getCountryByCity", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)

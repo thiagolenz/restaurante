@@ -47,6 +47,8 @@ public class TravelDaoImpl extends AbstractJpaDaoImpl<Travel> implements TravelD
 	public ServiceCollectionResponse<Travel> findTravelers(SearchTravelersRequest request) {
 		Map<String, Object> params = new HashMap<>();
 		StringBuilder strQuery = new StringBuilder("from Travel o where o.canceled is false and o.departureDate >= :departureDate ");
+		strQuery.append(" and o.userId != :userId");
+		
 		Travel entity = request.getRequest().getEntity();
 		
 		boolean addCountryOriginWhereClause = addCountryOriginWhereClause(strQuery, params, entity);
@@ -56,6 +58,7 @@ public class TravelDaoImpl extends AbstractJpaDaoImpl<Travel> implements TravelD
 		boolean addCountryDestinyWhereClause = addCountryDestinyWhereClause(request, strQuery, params, entity);
 		
 		params.put("departureDate", new Date());
+		params.put("userId", request.getRequest().getUser().getId());
 		
 		if (addCountryOriginWhereClause || addCityDestinyWhereClause || addProvinceDestinyWhereClause || addCountryDestinyWhereClause)
 			strQuery.append(" order by o.departureDate DESC");

@@ -9,5 +9,7 @@ import com.sacarona.model.world.Province;
 public interface ProvinceDAO extends GenericDAO<Province> {
 	Province findByAbbreviationAndCountry (String abbreviation, Long id);
 	
+	Province findByAbbreviationAndCountryIso (String abbreviation, String countryIso);
+	
 	ServiceCollectionResponse<Province> search(ServiceRequest<Province> request) throws UnknownHostException;
 }

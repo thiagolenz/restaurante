@@ -8,9 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-
+import javax.persistence.Transient;
 
 import com.sacarona.model.AbstractEntity;
+import com.sacarona.model.user.User;
 
 @Entity
 public class Receipt extends AbstractEntity {
@@ -22,11 +23,15 @@ public class Receipt extends AbstractEntity {
 	@Id
 	private Long id;
 	private Long userId;
+	private Long otherUserId;
 	private String description;
 	private String lastCreditCardNumbers;
 	private BigDecimal value;
 	private String paymentControl;
 	private Date paymentDate;
+	
+	@Transient
+	private User otherUser;
 	
 	public Long getId() {
 		return id;
@@ -71,5 +76,17 @@ public class Receipt extends AbstractEntity {
 	
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
+	}
+	public Long getOtherUserId() {
+		return otherUserId;
+	}
+	public void setOtherUserId(Long otherUserId) {
+		this.otherUserId = otherUserId;
+	}
+	public User getOtherUser() {
+		return otherUser;
+	}
+	public void setOtherUser(User otherUser) {
+		this.otherUser = otherUser;
 	}
 }

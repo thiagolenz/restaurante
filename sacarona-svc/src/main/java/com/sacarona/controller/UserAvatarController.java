@@ -1,14 +1,19 @@
 package com.sacarona.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.sacarona.common.FileHandler;
 import com.sacarona.common.context.RequestContext;
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.model.user.UserAvatar;
@@ -18,8 +23,8 @@ import com.sacarona.service.UserAvatarService;
 @RequestMapping(value="/userAvatar",produces=MediaType.APPLICATION_JSON_VALUE)
 public class UserAvatarController {
 	
-	@Autowired
-	private UserAvatarService userAvatarService; 
+	@Autowired private UserAvatarService userAvatarService;
+	@Autowired private FileHandler fileHandler; 
 	private RequestContext requestContext;
 
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
@@ -31,21 +36,12 @@ public class UserAvatarController {
 		return userAvatar;
 	}
 	
-	@RequestMapping(value="/", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/", method = RequestMethod.POST)
 	@ResponseBody
-	public UserAvatar save(@RequestBody UserAvatar avatar) {
-		if (avatar.getUserId() == null)
-			avatar.setUserId(requestContext.getUser().getId());
-		userAvatarService.insert(avatar);
-		return avatar;
-	}
-	
-	@RequestMapping(value="/{id}", method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public UserAvatar update(@RequestBody UserAvatar avatar, @PathVariable("id") Long id) {
-		if (avatar.getUserId() == null)
-			avatar.setUserId(requestContext.getUser().getId());
-		userAvatarService.update(avatar, id);
+	public UserAvatar convertFromFile (@RequestParam("file") MultipartFile fileMultiPart) throws BusinessException, IOException {
+		File file = fileHandler.saveIntoFile(fileMultiPart);
+		UserAvatar avatar = userAvatarService.save(requestContext.getUser(), file);
+		file.delete();
 		return avatar;
 	}
 }

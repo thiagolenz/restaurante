@@ -28,6 +28,7 @@ public class NotifyMobileServiceImpl implements NotifyMobileService {
 			List<CellPhoneRegister> registers = cellPhoneRegisterDAO.findByUser(userId);
 
 			for (CellPhoneRegister cellPhoneRegister : registers) {
+				System.out.println("cellReg "+ cellPhoneRegister.getRegId() + ", group "+ groupMessage + ", message: "+ message);
 				send(cellPhoneRegister, message, groupMessage);
 			}
 		}

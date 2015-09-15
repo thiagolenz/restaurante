@@ -30,21 +30,17 @@ public class CountryDaoImpl extends AbstractJpaDaoImpl<Country> implements Count
 		addNameQueryParam(request, builder, country.getNameEnglish(), params);
 		TypedQuery<Country> query = em.createQuery(builder.toString(), Country.class);
 		query.setParameter("name", params.get("name"));
+		query.setParameter("alternateNames", params.get("alternateNames"));
 		return executeQueryForPagination(query, request);
 	}
 
-	private void addNameQueryParam(ServiceRequest<Country> request, StringBuilder builder, String name, Map<String, String> params) {
-		String lang = request.getUser().getLang(); 
+	private void addNameQueryParam(ServiceRequest<Country> request, StringBuilder builder, String name, Map<String, String> params) { 
 		params.put("name", name.toLowerCase() + "%");
-		if (lang == null)
-			lang = "en-US";
-		if (lang.equals("en-US")) {
-			builder.append(" lower(o.nameEnglish) like :name order by o.nameEnglish");
-		} else if (lang.equals("es")) {
-			builder.append(" lower(o.nameSpanish) like :name order by o.nameSpanish");
-		} else { 
-			builder.append(" lower(o.namePortuguese) like :name order by o.namePortuguese");
-		}
+		params.put("alternateNames", "%"+ name.toLowerCase() + "%");
+		builder.append(" lower(o.nameEnglish) like :name or ");
+		builder.append(" lower(o.nameSpanish) like :name or" );
+		builder.append(" lower(o.namePortuguese) like :name or");
+		builder.append(" lower(o.alternativeNames) like :alternateNames order by o.nameEnglish, o.nameSpanish, o.namePortuguese " );
 	}
 	
 	@Override

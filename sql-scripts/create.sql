@@ -145,13 +145,14 @@ create table Dealing (
 );
 
 
-create table Location (
+create table Locations (
 	id bigint NOT NULL,
 	type varchar (20) not null,
 	nameEnglish varchar (255) not null,
 	namePortuguese varchar (255) not null,
 	nameSpanish varchar (255) not null,
-	entityId bigint not null
+	entityId bigint not null,
+	alternativeNames varchar (10000)
 );	
 
 

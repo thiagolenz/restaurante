@@ -20,7 +20,9 @@ public class Province extends AbstractEntity {
 	private Long id;
 	private String name;
 	private String abbreviation;
+	private String countryIso;
 	private Long countryId;
+	private String provinceId;
 	
 	@Transient
 	private Country country;
@@ -70,10 +72,23 @@ public class Province extends AbstractEntity {
 		return country;
 	}
 	
+	public String getCountryIso() {
+		return countryIso;
+	}
+	public void setCountryIso(String countryIso) {
+		this.countryIso = countryIso;
+	}
+	public String getProvinceId() {
+		return provinceId;
+	}
+	public void setProvinceId(String provinceId) {
+		this.provinceId = provinceId;
+	}
+
 	@Override
 	public String toString() {
 		return "Province [id=" + id + ", name=" + name + ", abbreviation="
-				+ abbreviation + ", countryId=" + countryId + "]";
+				+ abbreviation + ", countryIso=" + countryIso + ", countryId="
+				+ countryId + ", country=" + country + "]";
 	}
-	
 }

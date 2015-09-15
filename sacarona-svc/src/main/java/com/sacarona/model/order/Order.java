@@ -63,6 +63,8 @@ public class Order extends AbstractEntity {
 	@Transient
 	private BigDecimal score;
 	
+	private boolean removed = false;
+	
 	public Order() {
 		
 	}
@@ -176,4 +178,11 @@ public class Order extends AbstractEntity {
 	public void setScore(BigDecimal score) {
 		this.score = score;
 	}	
+	
+	public boolean isRemoved() {
+		return removed;
+	}
+	public void setRemoved(boolean removed) {
+		this.removed = removed;
+	}
 }

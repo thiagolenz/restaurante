@@ -24,7 +24,11 @@ public class LocationDaoImpl extends AbstractJpaDaoImpl<Location> implements
 		addNameQueryParam(request, builder, country.getNameEnglish(), params);
 		TypedQuery<Location> query = em.createQuery(builder.toString(), Location.class);
 		query.setParameter("name", params.get("name"));
-		return executeQueryForPagination(query, request);
+		ServiceCollectionResponse<Location> result = executeQueryForPagination(query, request);
+		for (Location item : result.getDataList()) {
+			item.setAlternativeNames(null);
+		}
+		return result;
 	}
 
 	private void addNameQueryParam(ServiceRequest<Location> request, StringBuilder builder, String name, Map<String, String> params) {

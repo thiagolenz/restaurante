@@ -5,16 +5,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.sacarona.model.AbstractEntity;
 
 @Entity
+@Table(name="locations")
 public class Location extends AbstractEntity {
-	@SequenceGenerator(name="seq_location",
-			sequenceName="seq_location",
+	@SequenceGenerator(name="seq_locations",
+			sequenceName="seq_locations",
 			allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,
-	generator="seq_location")
+	generator="seq_locations")
 	@Id
 	private Long id;
 	private String type;
@@ -22,6 +24,7 @@ public class Location extends AbstractEntity {
 	private String namePortuguese;
 	private String nameSpanish;
 	private Long entityId;
+	private String alternativeNames;
 	
 	public Long getId() {
 		return id;
@@ -58,5 +61,11 @@ public class Location extends AbstractEntity {
 	}
 	public void setEntityId(Long entityId) {
 		this.entityId = entityId;
+	}
+	public String getAlternativeNames() {
+		return alternativeNames;
+	}
+	public void setAlternativeNames(String alternativeNames) {
+		this.alternativeNames = alternativeNames;
 	}
 }

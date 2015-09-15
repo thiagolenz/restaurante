@@ -23,6 +23,7 @@ public class Country extends AbstractEntity{
 	private String iso;
 	private String un;
 	private Long externalId;
+	private String alternativeNames;
 	
 	public Country() {
 	
@@ -78,6 +79,14 @@ public class Country extends AbstractEntity{
 		this.externalId = externalId;
 	}
 	
+	public String getAlternativeNames() {
+		return alternativeNames;
+	}
+	
+	public void setAlternativeNames(String alternativeNames) {
+		this.alternativeNames = alternativeNames;
+	}
+	
 	public String getNameByLang (String lang) {
 		if (lang == null)
 			lang = "en-US";
@@ -88,11 +97,13 @@ public class Country extends AbstractEntity{
 		else 
 			return namePortuguese;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Country [id=" + id + ", nameEnglish=" + nameEnglish
 				+ ", nameSpanish=" + nameSpanish + ", namePortuguese="
-				+ namePortuguese + ", iso=" + iso + ", un=" + un + "]";
+				+ namePortuguese + ", iso=" + iso + ", un=" + un
+				+ ", externalId=" + externalId + ", alternativeNames="
+				+ alternativeNames + "]";
 	}
 }

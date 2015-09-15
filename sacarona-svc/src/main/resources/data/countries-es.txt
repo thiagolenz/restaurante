@@ -1,251 +1,251 @@
-Afghanistan,.AF,Afganistán
-Åland,.AX,Åland
-Albania,.AL,Albania
-Algeria,.DZ,Argelia
-American Samoa,.AS,Samoa Americana
-Andorra,.AD,Andorra
-Angola,.AO,Angola
-Anguilla,.AI,Anguila
-Antarctica,.AQ,Antártico
-Antigua and Barbuda,.AG,Antigua y Barbuda
-Argentina,.AR,Argentina
-Armenia,.AM,Armenia
-Aruba,.AW,Aruba
-Ascension Island,.AC,Isla Ascensión
-Australia,.AU,Australia
-Austria,.AT,Austria
-Azerbaijan,.AZ,Azerbaiyán
-Bahamas,.BS,Bahamas
-Bahrain,.BH,Bahréin
-Bangladesh,.BD,Bangladesh
-Barbados,.BB,Barbados
-Belarus,.BY,Bielorrusia
-Belgium,.BE,Bélgica
-Belize,.BZ,Belice
-Benin,.BJ,Benín
-Bermuda,.BM,Bermudas
-Bhutan,.BT,Bután
-Bolivia,.BO,Bolivia
-Bonaire Saint Eustatius and Saba,.BQ,Bonaire San Estaquio y Saba
-Bosnia-Herzegovina,.BA,Bosnia-Herzegovina
-Botswana,.BW,Botsuana
-Brazil,.BR,Brasil
-British Indian Ocean Territory,.IO,Territorio Británico en el Océano Índico
-British Virgin Islands,.VG,Islas Vírgenes Británicas
-Brunei Darussalam,.BN,Brunei Darussalam
-Bulgaria,.BG,Bulgaria
-Burkina Faso,.BF,Burkina Faso
-Burundi,.BI,Burundi
-Cambodia,.KH,Camboya
-Cameroon,.CM,Camerún
-Canada,.CA,Canadá
-Cape Verde,.CV,Cabo Verde
-Catalonia,.CAT,Catalunya
-Cayman Islands,.KY,Islas Caimán
-Central African Republic,.CF,República Centroafricana
-Chad,.TD,Chad
-Chile,.CL,Chile
-China (Peoples Republic of),.CN,China (República Popular)
-Christmas Island,.CX,Isla de Navidad
-Cocos/Keeling Islands,.CC,Islas Cocos
-Colombia,.CO,Colombia
-Comoros,.KM,Comoras
-Congo (Republic of the),.CG,Congo (República del)
-Cook Islands,.CK,Islas Cook
-Costa Rica,.CR,Costa Rica
-Côte d'Ivoire,.CI,Costa de Marfil
-Croatia,.HR,Croacia
-Cuba,.CU,Cuba
-Curação,.CW,Curasao
-Cyprus,.CY,Chipre
-Czech Republic,.CZ,República Checa
-Democratic Republic of the Congo,.CD,República Democrática del Congo
-Denmark,.DK,Dinamarca
-Djibouti,.DJ,Yibuti
-Dominica,.DM,Dominica
-Dominican Republic,.DO,República Dominicana
-East Timor,.TL,Timor Oriental
-Ecuador,.EC,Ecuador
-Egypt,.EG,Egipto
-El Salvador,.SV,El Salvador
-Equatorial Guinea,.GQ,Guinea Ecuatorial
-Eritrea,.ER,Eritrea
-Estonia,.EE,Estonia
-Ethiopia,.ET,Etiopía
-European Union,.EU,Unión Europea
-Falkland Islands,.FK,Islas Malvinas
-Faroe Islands,.FO,Islas Feroe
-Fiji,.FJ,Fiyi
-Finland,.FI,Finlandia
-France,.FR,Francia
-French Guiana,.GF,Guayana Francesa
-French Polynesia,.PF,Polinesia Francesa
-French Southern and Antarctic Lands,.TF,Territorios Australes Franceses
-Gabon,.GA,Gabón
-Gambia (The),.GM,Gambia
-Georgia,.GE,Georgia
-Germany,.DE,Alemania
-Ghana,.GH,Ghana
-Gibraltar,.GI,Gibraltar
-Greece,.GR,Grecia
-Greenland,.GL,Groenlandia
-Grenada,.GD,Granada
-Guadeloupe,.GP,Guadalupe
-Guam,.GU,Guam
-Guatemala,.GT,Guatemala
-Guernsey,.GG,Guernesey
-Guinea,.GN,Guinea
-Guinea-Bissau,.GW,Guinea-Bissau
-Guyana,.GY,Guyana
-Haiti,.HT,Haití
-Heard Island and McDonald Islands,.HM,Islas Heard y McDonald
-Holland,.NL,Holanda (see netherlands)
-Honduras,.HN,Honduras
-Hong Kong,.HK,Hong Kong
-Hungary,.HU,Hungría
-Iceland,.IS,Islandia
-India,.IN,India
-Indonesia,.ID,Indonesia
-Iran,.IR,Irán
-Iraq,.IQ,Iraq
-Ireland,.IE,Irlanda
-Isle of Man,.IM,Isla de Man
-Israel,.IL,Israel
-Italy,.IT,Italia
-Jamaica,.JM,Jamaica
-Japan,.JP,Japón
-Jersey,.JE,Isla de Jersey
-Jordan,.JO,Jordania
-Kazakhstan,.KZ,Kazajistán
-Kenya,.KE,Kenia
-Kiribati,.KI,Kiribati
-Korea (North),.KP,Corea (del Norte)
-Korea (South),.KO,Corea (del Sur)
-Kuwait,.KW,Kuwait
-Kyrgyzstan,.KG,Kirguistán
-Laos,.LA,Laos
-Latvia,.LV,Letonia
-Lebanon,.LB,Líbano
-Lesotho,.LS,Lesotho
-Liberia,.LR,Liberia
-Libya,.LY,Libia
-Liechtenstein,.LI,Liechtenstein
-Lithuania,.LT,Lituania
-Luxembourg,.LU,Luxemburgo
-Macau,.MO,Macao
-Macedonia (Republic of),.MK,Macedonia (República de)
-Madagascar,.MG,Madagascar
-Malawi,.MW,Malawi
-Malaysia,.MY,Malasia
-Maldives,.MV,Maldivas
-Mali,.ML,Malí
-Malta,.MT,Malta
-Marshall Islands,.MH,Islas Marshall
-Martinique,.MQ,Martinica
-Mauritania,.MR,Mauritania
-Mauritius,.MU,Mauricio
-Mayotte,.YT,Mayotte
-Mexico,.MX,México
-Micronesia (Federated States of),.FM,Micronesia (Estados Federados de)
-Moldova,.MD,Moldavia
-Monaco,.MC,Mónaco
-Mongolia,.MN,Mongolia
-Montenegro,.ME,Montenegro
-Montserrat,.MS,Montserrat
-Morocco,.MA,Marruecos
-Mozambique,.MZ,Mozambique
-Myanmar,.MM,Myanmar
-Namibia,.NA,Namibia
-Nauru,.NR,Nauru
-Nepal,.NP,Nepal
-Netherlands (Holland),.NL,Países Bajos (Holanda)
-Netherlands Antilles (no longer exists),.AN,Antillas Nederlandesas (ya no existe)
-New Caledonia,.NC,Nueva Caledonia
-New Zealand,.NZ,Nueva Zelanda
-Nicaragua,.NI,Nicaragua
-Niger,.NE,Níger
-Nigeria,.NG,Nigeria
-Niue,.NU,Niue
-Norfolk Island,.NF,Isla Norfolk
-Northern Ireland,.UK,Irlanda del Norte
-Northern Mariana Islands,.MP,Islas Marianas del Norte
-Norway,.NO,Noruega
-Oman,.OM,Omán
-Pakistan,.PK,Pakistán
-Palau,.PW,Palau
-Palestinian Territories,.PS,Palestina
-Panama,.PA,Panamá
-Papua New Guinea,.PG,Papúa Nueva Guinea
-Paraguay,.PY,Paraguay
-Peru,.PE,Perú
-Philippines,.PH,Filipinas
-Pitcairn Islands,.PN,Islas Pitcairn
-Poland,.PL,Polonia
-Portugal,.PT,Portugal
-Puerto Rico,.PR,Puerto Rico
-Qatar,.QA,Qatar
-Réunion,.RE,Reunión
-Romania,.RO,Rumania
-Russia,.RU,Rusia
-Rwanda,.RW,Ruanda
-Saint Helena,.SH,Santa Helena
-Saint Kitts and Nevis,.KN,San Cristóbal y Nieves
-Saint Lucia,.LC,Santa Lucía
-Saint Maarten,.SX,San Martín (Sint Maarten)
-Saint Vincent and the Grenadines,.VC,San Vicente y las Granadinas
-Saint-Pierre and Miquelon,.PM,San Pedro y Miquelón
-San Marino,.SM,San Marino
-São Tomé and Príncipe,.ST,Santo Tomé y Príncipe
-Saudi Arabia,.SA,Arabia Saudita
-Senegal,.SN,Senegal
-Serbia,.RS,Serbia
-Seychelles,.SC,Seychelles
-Sierra Leone,.SL,Sierra Leona
-Singapore,.SG,Singapur
-Slovakia,.SK,Eslovaquia
-Slovenia,.SI,Eslovenia
-Solomon Islands,.SB,Islas Salomón
-Somalia,.SO,Somalia
-South Africa,.ZA,Sudáfrica
-South Georgia and the South Sandwich Islands,.GS,Islas Georgias del Sur y Sandwich del Sur
-Soviet Union (USSR),.SU,Unión Soviética (URSS)
-Spain,.ES,España
-Sri Lanka,.LK,Sri Lanka
-Sudan,.SD,Sudán
-Suriname,.SR,Surinam
-Svalbard and Jan Mayen Islands,.SJ,Islas Svalbard y Jan Mayen
-Swaziland,.SZ,Swazilandia
-Sweden,.SE,Suecia
-Switzerland,.CH,Suiza
-Syria,.SY,Siria
-Taiwan,.TW,Taiwán
-Tajikistan,.TJ,Tayikistán
-Tanzania,.TZ,Tanzania
-Thailand,.TH,Tailandia
-Togo,.TG,Togo
-Tokelau,.TK,Tokelau
-Tonga,.TO,Tonga
-Trinidad and Tobago,.TT,Trinidad y Tobago
-Tunisia,.TN,Túnez
-Turkey,.TR,Turquía
-Turkmenistan,.TM,Turkmenistán
-Turks and Caicos Islands,.TC,Islas Turcas y Caicos
-Tuvalu,.TV,Tuvalu
-Uganda,.UG,Uganda
-Ukraine,.UA,Ucrania
-United Arab Emirates,.AE,Emiratos Árabes Unidos
-United Kingdom (UK),.UK,Reino Unido (RU)
-United States of America (USA),.US,Estados Unidos (EEUU)
-Uruguay,.UY,Uruguay
-US Virgin Islands,.VI,Islas Vírgenes de los Estados Unidos
-Uzbekistan,.UZ,Uzbekistán
-Vanuatu,.VU,Vanuatu
-Vatican City State,.VA,Ciudad del Vaticano
-Venezuela,.VE,Venezuela
-Vietnam,.VN,Vietnam
-Wallis and Futuna,.WF,Wallis y Futuna
-Western Samoa,.WS,Samoa del Oeste
-Yemen,.YE,Yemen
-Yugoslavia,.YU,Yugoslavia
-Zambia,.ZM,Zambia
-Zimbabwe,.ZW,Zimbabue
+Afghanistan,AF,Afganistán
+Åland,AX,Åland
+Albania,AL,Albania
+Algeria,DZ,Argelia
+American Samoa,AS,Samoa Americana
+Andorra,AD,Andorra
+Angola,AO,Angola
+Anguilla,AI,Anguila
+Antarctica,AQ,Antártico
+Antigua and Barbuda,AG,Antigua y Barbuda
+Argentina,AR,Argentina
+Armenia,AM,Armenia
+Aruba,AW,Aruba
+Ascension Island,AC,Isla Ascensión
+Australia,AU,Australia
+Austria,AT,Austria
+Azerbaijan,AZ,Azerbaiyán
+Bahamas,BS,Bahamas
+Bahrain,BH,Bahréin
+Bangladesh,BD,Bangladesh
+Barbados,BB,Barbados
+Belarus,BY,Bielorrusia
+Belgium,BE,Bélgica
+Belize,BZ,Belice
+Benin,BJ,Benín
+Bermuda,BM,Bermudas
+Bhutan,BT,Bután
+Bolivia,BO,Bolivia
+Bonaire Saint Eustatius and Saba,BQ,Bonaire San Estaquio y Saba
+Bosnia-Herzegovina,BA,Bosnia-Herzegovina
+Botswana,BW,Botsuana
+Brazil,BR,Brasil
+British Indian Ocean Territory,IO,Territorio Británico en el Océano Índico
+British Virgin Islands,VG,Islas Vírgenes Británicas
+Brunei Darussalam,BN,Brunei Darussalam
+Bulgaria,BG,Bulgaria
+Burkina Faso,BF,Burkina Faso
+Burundi,BI,Burundi
+Cambodia,KH,Camboya
+Cameroon,CM,Camerún
+Canada,CA,Canadá
+Cape Verde,CV,Cabo Verde
+Catalonia,CAT,Catalunya
+Cayman Islands,KY,Islas Caimán
+Central African Republic,CF,República Centroafricana
+Chad,TD,Chad
+Chile,CL,Chile
+China (Peoples Republic of),CN,China (República Popular)
+Christmas Island,CX,Isla de Navidad
+Cocos/Keeling Islands,CC,Islas Cocos
+Colombia,CO,Colombia
+Comoros,KM,Comoras
+Congo (Republic of the),CG,Congo (República del)
+Cook Islands,CK,Islas Cook
+Costa Rica,CR,Costa Rica
+Côte d'Ivoire,CI,Costa de Marfil
+Croatia,HR,Croacia
+Cuba,CU,Cuba
+Curação,CW,Curasao
+Cyprus,CY,Chipre
+Czech Republic,CZ,República Checa
+Democratic Republic of the Congo,CD,República Democrática del Congo
+Denmark,DK,Dinamarca
+Djibouti,DJ,Yibuti
+Dominica,DM,Dominica
+Dominican Republic,DO,República Dominicana
+East Timor,TL,Timor Oriental
+Ecuador,EC,Ecuador
+Egypt,EG,Egipto
+El Salvador,SV,El Salvador
+Equatorial Guinea,GQ,Guinea Ecuatorial
+Eritrea,ER,Eritrea
+Estonia,EE,Estonia
+Ethiopia,ET,Etiopía
+European Union,EU,Unión Europea
+Falkland Islands,FK,Islas Malvinas
+Faroe Islands,FO,Islas Feroe
+Fiji,FJ,Fiyi
+Finland,FI,Finlandia
+France,FR,Francia
+French Guiana,GF,Guayana Francesa
+French Polynesia,PF,Polinesia Francesa
+French Southern and Antarctic Lands,TF,Territorios Australes Franceses
+Gabon,GA,Gabón
+Gambia (The),GM,Gambia
+Georgia,GE,Georgia
+Germany,DE,Alemania
+Ghana,GH,Ghana
+Gibraltar,GI,Gibraltar
+Greece,GR,Grecia
+Greenland,GL,Groenlandia
+Grenada,GD,Granada
+Guadeloupe,GP,Guadalupe
+Guam,GU,Guam
+Guatemala,GT,Guatemala
+Guernsey,GG,Guernesey
+Guinea,GN,Guinea
+Guinea-Bissau,GW,Guinea-Bissau
+Guyana,GY,Guyana
+Haiti,HT,Haití
+Heard Island and McDonald Islands,HM,Islas Heard y McDonald
+Holland,NL,Holanda (see netherlands)
+Honduras,HN,Honduras
+Hong Kong,HK,Hong Kong
+Hungary,HU,Hungría
+Iceland,IS,Islandia
+India,IN,India
+Indonesia,ID,Indonesia
+Iran,IR,Irán
+Iraq,IQ,Iraq
+Ireland,IE,Irlanda
+Isle of Man,IM,Isla de Man
+Israel,IL,Israel
+Italy,IT,Italia
+Jamaica,JM,Jamaica
+Japan,JP,Japón
+Jersey,JE,Isla de Jersey
+Jordan,JO,Jordania
+Kazakhstan,KZ,Kazajistán
+Kenya,KE,Kenia
+Kiribati,KI,Kiribati
+Korea (North),KP,Corea (del Norte)
+Korea (South),KO,Corea (del Sur)
+Kuwait,KW,Kuwait
+Kyrgyzstan,KG,Kirguistán
+Laos,LA,Laos
+Latvia,LV,Letonia
+Lebanon,LB,Líbano
+Lesotho,LS,Lesotho
+Liberia,LR,Liberia
+Libya,LY,Libia
+Liechtenstein,LI,Liechtenstein
+Lithuania,LT,Lituania
+Luxembourg,LU,Luxemburgo
+Macau,MO,Macao
+Macedonia (Republic of),MK,Macedonia (República de)
+Madagascar,MG,Madagascar
+Malawi,MW,Malawi
+Malaysia,MY,Malasia
+Maldives,MV,Maldivas
+Mali,ML,Malí
+Malta,MT,Malta
+Marshall Islands,MH,Islas Marshall
+Martinique,MQ,Martinica
+Mauritania,MR,Mauritania
+Mauritius,MU,Mauricio
+Mayotte,YT,Mayotte
+Mexico,MX,México
+Micronesia (Federated States of),FM,Micronesia (Estados Federados de)
+Moldova,MD,Moldavia
+Monaco,MC,Mónaco
+Mongolia,MN,Mongolia
+Montenegro,ME,Montenegro
+Montserrat,MS,Montserrat
+Morocco,MA,Marruecos
+Mozambique,MZ,Mozambique
+Myanmar,MM,Myanmar
+Namibia,NA,Namibia
+Nauru,NR,Nauru
+Nepal,NP,Nepal
+Netherlands (Holland),NL,Países Bajos (Holanda)
+Netherlands Antilles (no longer exists),AN,Antillas Nederlandesas (ya no existe)
+New Caledonia,NC,Nueva Caledonia
+New Zealand,NZ,Nueva Zelanda
+Nicaragua,NI,Nicaragua
+Niger,NE,Níger
+Nigeria,NG,Nigeria
+Niue,NU,Niue
+Norfolk Island,NF,Isla Norfolk
+Northern Ireland,UK,Irlanda del Norte
+Northern Mariana Islands,MP,Islas Marianas del Norte
+Norway,NO,Noruega
+Oman,OM,Omán
+Pakistan,PK,Pakistán
+Palau,PW,Palau
+Palestinian Territories,PS,Palestina
+Panama,PA,Panamá
+Papua New Guinea,PG,Papúa Nueva Guinea
+Paraguay,PY,Paraguay
+Peru,PE,Perú
+Philippines,PH,Filipinas
+Pitcairn Islands,PN,Islas Pitcairn
+Poland,PL,Polonia
+Portugal,PT,Portugal
+Puerto Rico,PR,Puerto Rico
+Qatar,QA,Qatar
+Réunion,RE,Reunión
+Romania,RO,Rumania
+Russia,RU,Rusia
+Rwanda,RW,Ruanda
+Saint Helena,SH,Santa Helena
+Saint Kitts and Nevis,KN,San Cristóbal y Nieves
+Saint Lucia,LC,Santa Lucía
+Saint Maarten,SX,San Martín (Sint Maarten)
+Saint Vincent and the Grenadines,VC,San Vicente y las Granadinas
+Saint-Pierre and Miquelon,PM,San Pedro y Miquelón
+San Marino,SM,San Marino
+São Tomé and Príncipe,ST,Santo Tomé y Príncipe
+Saudi Arabia,SA,Arabia Saudita
+Senegal,SN,Senegal
+Serbia,RS,Serbia
+Seychelles,SC,Seychelles
+Sierra Leone,SL,Sierra Leona
+Singapore,SG,Singapur
+Slovakia,SK,Eslovaquia
+Slovenia,SI,Eslovenia
+Solomon Islands,SB,Islas Salomón
+Somalia,SO,Somalia
+South Africa,ZA,Sudáfrica
+South Georgia and the South Sandwich Islands,GS,Islas Georgias del Sur y Sandwich del Sur
+Soviet Union (USSR),SU,Unión Soviética (URSS)
+Spain,ES,España
+Sri Lanka,LK,Sri Lanka
+Sudan,SD,Sudán
+Suriname,SR,Surinam
+Svalbard and Jan Mayen Islands,SJ,Islas Svalbard y Jan Mayen
+Swaziland,SZ,Swazilandia
+Sweden,SE,Suecia
+Switzerland,CH,Suiza
+Syria,SY,Siria
+Taiwan,TW,Taiwán
+Tajikistan,TJ,Tayikistán
+Tanzania,TZ,Tanzania
+Thailand,TH,Tailandia
+Togo,TG,Togo
+Tokelau,TK,Tokelau
+Tonga,TO,Tonga
+Trinidad and Tobago,TT,Trinidad y Tobago
+Tunisia,TN,Túnez
+Turkey,TR,Turquía
+Turkmenistan,TM,Turkmenistán
+Turks and Caicos Islands,TC,Islas Turcas y Caicos
+Tuvalu,TV,Tuvalu
+Uganda,UG,Uganda
+Ukraine,UA,Ucrania
+United Arab Emirates,AE,Emiratos Árabes Unidos
+United Kingdom (UK),UK,Reino Unido (RU)
+United States of America (USA),US,Estados Unidos (EEUU)
+Uruguay,UY,Uruguay
+US Virgin Islands,VI,Islas Vírgenes de los Estados Unidos
+Uzbekistan,UZ,Uzbekistán
+Vanuatu,VU,Vanuatu
+Vatican City State,VA,Ciudad del Vaticano
+Venezuela,VE,Venezuela
+Vietnam,VN,Vietnam
+Wallis and Futuna,WF,Wallis y Futuna
+Western Samoa,WS,Samoa del Oeste
+Yemen,YE,Yemen
+Yugoslavia,YU,Yugoslavia
+Zambia,ZM,Zambia
+Zimbabwe,ZW,Zimbabue

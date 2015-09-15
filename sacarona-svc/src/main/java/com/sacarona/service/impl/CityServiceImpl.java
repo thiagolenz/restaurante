@@ -1,6 +1,7 @@
 package com.sacarona.service.impl;
 
 import java.net.UnknownHostException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,17 +25,26 @@ public class CityServiceImpl implements CityService {
 	
 	@Transactional
 	public void insertOrUpdate (City city) throws BusinessException {
-		System.out.println("inserting " + city);
-		City existent;
-		try {
-			existent = cityDAO.findByCountryAndCode(city.getCountryIso(), city.getCode());
-		} catch (UnknownHostException e) {
-			throw new BusinessException(e);
-		}
+		City existent = cityDAO.findByExistent(city);
+		if (city.getAlternativeNames() != null && city.getAlternativeNames().length() >= 10000)
+			city.setAlternativeNames(city.getAlternativeNames().substring(0, 9998));
 		if (existent == null)
 			cityDAO.insert(city);
 		else 
 			cityDAO.update(city, existent.getId());
+	}
+	
+	@Transactional
+	public void insertOrUpdate(List<City> cities) throws BusinessException {
+		for (City city : cities) {
+			City existent = cityDAO.findByExistent(city);
+			if (city.getAlternativeNames() != null && city.getAlternativeNames().length() >= 10000)
+				city.setAlternativeNames(city.getAlternativeNames().substring(0, 9998));
+			if (existent == null)
+				cityDAO.insert(city);
+			else 
+				cityDAO.update(city, existent.getId());
+		}
 	}
 
 	@Transactional

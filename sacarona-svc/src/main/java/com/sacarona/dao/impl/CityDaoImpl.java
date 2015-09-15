@@ -34,6 +34,16 @@ public class CityDaoImpl extends AbstractJpaDaoImpl<City> implements CityDAO {
 		query.setParameter("code", code);
 		return singleQuery(query);
 	}
+	
+	@Override
+	public City findByExistent(City city) {
+		TypedQuery<City> query = em.createQuery("from City o where o.countryIso = :countryIso and o.name = :name " +
+				" and o.provinceAbbreviation = :provinceAbbreviation", City.class);
+		query.setParameter("countryIso", city.getCountryIso());
+		query.setParameter("name", city.getName());
+		query.setParameter("provinceAbbreviation", city.getProvinceAbbreviation());
+		return singleQuery(query);
+	}
 
 	@Override
 	public ServiceCollectionResponse<City> search(ServiceRequest<City> request) throws UnknownHostException {
@@ -59,14 +69,17 @@ public class CityDaoImpl extends AbstractJpaDaoImpl<City> implements CityDAO {
 	}
 	
 	public void completeTheName (City cityTemp, String lang) {
-		cityTemp.setCompleteName(cityTemp.getName() + " "+ cityTemp.getProvinceAbbreviation());
-		
-		Country country = countryDAO.findByIsoCode(cityTemp.getCountryIso());
-		cityTemp.setCountry(country);
-		if (country != null) {
-			cityTemp.setCompleteName(cityTemp.getCompleteName() + ", " + country.getNameByLang(lang));
-			Province province = provinceDAO.findByAbbreviationAndCountry(cityTemp.getProvinceAbbreviation(), country.getExternalId());
-			cityTemp.setProvince(province);
+		if (cityTemp != null) {
+			cityTemp.setCompleteName(cityTemp.getName() + " "+ cityTemp.getProvinceAbbreviation());
+			
+			Country country = countryDAO.findByIsoCode(cityTemp.getCountryIso());
+			cityTemp.setCountry(country);
+			if (country != null) {
+				cityTemp.setCompleteName(cityTemp.getCompleteName() + ", " + country.getNameByLang(lang));
+				Province province = provinceDAO
+						.findByAbbreviationAndCountryIso(cityTemp.getProvinceAbbreviation(), cityTemp.getCountryIso());
+				cityTemp.setProvince(province);
+			}
 		}
 	}
 }

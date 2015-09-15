@@ -41,7 +41,7 @@ public class CellPhoneRegisterController {
 		return Response.newSuccessResponse();
 	}
 	
-	@RequestMapping(value="/sendNotification/{title}/{message}", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/sendNotification/{title}/{message}/", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Response sendNotification (@PathVariable ("title") String title, @PathVariable ("message") String message ) throws BusinessException {
 		mobileService.notify(title, message, requestContext.getUser().getId());

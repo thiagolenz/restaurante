@@ -22,6 +22,8 @@ public class City extends AbstractEntity{
 	private String code;
 	private String countryIso;
 	private String provinceAbbreviation;
+	private String alternativeNames;
+	private String importerId;
 	
 	@Transient
 	private Province province;
@@ -97,12 +99,28 @@ public class City extends AbstractEntity{
 	public void setCountry(Country country) {
 		this.country = country;
 	}
+	
+	public String getImporterId() {
+		return importerId;
+	}
+	public void setImporterId(String importerId) {
+		this.importerId = importerId;
+	}
+	
+	public String getAlternativeNames() {
+		return alternativeNames;
+	}
+	
+	public void setAlternativeNames(String alternativeNames) {
+		this.alternativeNames = alternativeNames;
+	}
 
 	@Override
 	public String toString() {
 		return "City [id=" + id + ", name=" + name + ", code=" + code
 				+ ", countryIso=" + countryIso + ", provinceAbbreviation="
-				+ provinceAbbreviation + "]";
+				+ provinceAbbreviation + ", importerId=" + importerId
+				+ ", province=" + province + ", country=" + country
+				+ ", completeName=" + completeName + "]";
 	}
-
 }
