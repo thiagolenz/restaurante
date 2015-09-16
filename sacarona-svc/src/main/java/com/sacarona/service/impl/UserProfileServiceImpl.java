@@ -12,21 +12,26 @@ import com.sacarona.dao.UserProfileDAO;
 import com.sacarona.model.user.User;
 import com.sacarona.model.user.UserProfile;
 import com.sacarona.service.UserProfileService;
+import com.sacarona.service.UserRatingService;
 
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
 	@Autowired private UserProfileDAO profileDAO;
 	@Autowired private UserDAO userDAO;
+	@Autowired private UserRatingService ratingService;
 
 	@Transactional
 	public UserProfile insert(UserProfile userProfile) {
 		userProfile.setCreateDate(new Date ());
-		return profileDAO.insert(userProfile);
+		profileDAO.insert(userProfile);
+		ratingService.recalculate(userProfile.getUserId());
+		return userProfile;
 	}
 
 	@Transactional
 	public UserProfile update(UserProfile userProfile, Long id) {
 		profileDAO.update(userProfile, id);
+		ratingService.recalculate(userProfile.getUserId());
 		return userProfile;
 	}
 

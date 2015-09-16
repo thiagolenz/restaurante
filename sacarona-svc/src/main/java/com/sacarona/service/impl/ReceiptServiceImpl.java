@@ -11,16 +11,21 @@ import com.sacarona.dao.UserDAO;
 import com.sacarona.model.dealing.Receipt;
 import com.sacarona.model.user.User;
 import com.sacarona.service.ReceiptService;
+import com.sacarona.service.UserRatingService;
 
 @Service
 public class ReceiptServiceImpl implements ReceiptService {
 	@Autowired private ReceiptDAO receiptDAO;
 	
 	@Autowired private UserDAO userDAO;
+	
+	@Autowired private UserRatingService ratingService;
 
 	@Transactional
 	public Receipt insert(Receipt receipt) {
-		return receiptDAO.insert(receipt);
+		receiptDAO.insert(receipt);
+		ratingService.recalculate(receipt.getUserId());
+		return receipt;
 	}
 
 	@Transactional

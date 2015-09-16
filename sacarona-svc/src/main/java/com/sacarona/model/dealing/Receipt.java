@@ -29,6 +29,7 @@ public class Receipt extends AbstractEntity {
 	private BigDecimal value;
 	private String paymentControl;
 	private Date paymentDate;
+	private String credicardName;
 	
 	@Transient
 	private User otherUser;
@@ -88,5 +89,13 @@ public class Receipt extends AbstractEntity {
 	}
 	public void setOtherUser(User otherUser) {
 		this.otherUser = otherUser;
+	}
+	
+	public String getCredicardName() {
+		return credicardName;
+	}
+	
+	public void setCredicardName(String credicardName) {
+		this.credicardName = credicardName;
 	}
 }

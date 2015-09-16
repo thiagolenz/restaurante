@@ -1,5 +1,6 @@
 package com.sacarona.model.user;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -55,7 +56,13 @@ public class UserProfile extends AbstractEntity {
 	private String twitterUrl;
 	private String linkedinUrl;
 	
+	private String secondaryEmail;
+	private String secondarySocialMediaId;
+	private String secondaryName;
+	
 	private Date createDate;
+	
+	private BigDecimal sacaronaRating;
 	
 	@Transient
 	private User user;
@@ -193,5 +200,30 @@ public class UserProfile extends AbstractEntity {
 	
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	public String getSecondaryEmail() {
+		return secondaryEmail;
+	}
+	public void setSecondaryEmail(String secondaryEmail) {
+		this.secondaryEmail = secondaryEmail;
+	}
+	public String getSecondarySocialMediaId() {
+		return secondarySocialMediaId;
+	}
+	public void setSecondarySocialMediaId(String secondarySocialMediaId) {
+		this.secondarySocialMediaId = secondarySocialMediaId;
+	}
+	
+	public String getSecondaryName() {
+		return secondaryName;
+	}
+	public void setSecondaryName(String secondaryName) {
+		this.secondaryName = secondaryName;
+	}
+	public BigDecimal getSacaronaRating() {
+		return sacaronaRating;
+	}
+	public void setSacaronaRating(BigDecimal sacaronaRating) {
+		this.sacaronaRating = sacaronaRating;
 	}
 }

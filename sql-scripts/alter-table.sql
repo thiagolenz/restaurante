@@ -43,5 +43,17 @@ CREATE INDEX UK_CITY_FIND ON CITY (countryIso, provinceAbbreviation, name);
 
 drop table locations;
 
+-- novos 2
+
+alter table userprofile add column secondaryEmail varchar (150);
+alter table userprofile add column secondarySocialMediaId varchar (150);
+alter table userprofile add column secondaryName varchar (200);
+
+-- novos 3
+
+alter table Receipt add column credicardName varchar (200);
+alter table userprofile add column sacaronaRating numeric (8,2);
+
+
 
 

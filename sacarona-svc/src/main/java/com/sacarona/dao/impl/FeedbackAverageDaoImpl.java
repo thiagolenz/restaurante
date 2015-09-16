@@ -1,7 +1,5 @@
 package com.sacarona.dao.impl;
 
-import java.net.UnknownHostException;
-
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -13,7 +11,7 @@ import com.sacarona.model.feedback.FeedbackAverage;
 public class FeedbackAverageDaoImpl extends AbstractJpaDaoImpl<FeedbackAverage> implements FeedbackAverageDAO {
 
 	@Override
-	public FeedbackAverage findByUser(Long userId) throws UnknownHostException {
+	public FeedbackAverage findByUser(Long userId){
 		TypedQuery<FeedbackAverage> query = 
 				em.createQuery("from FeedbackAverage o where o.userId = :userId ", FeedbackAverage.class);
 		query.setParameter("userId", userId);

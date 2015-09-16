@@ -15,11 +15,13 @@ import com.sacarona.dao.FeedbackDAO;
 import com.sacarona.model.feedback.Feedback;
 import com.sacarona.model.feedback.FeedbackAverage;
 import com.sacarona.service.FeedbackService;
+import com.sacarona.service.UserRatingService;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 	@Autowired private FeedbackDAO feedbackDAO;
 	@Autowired private FeedbackAverageDAO averageDAO;
+	@Autowired private UserRatingService ratingService;
 
 	@Transactional
 	public Feedback insert(Feedback feedback) throws BusinessException {
@@ -42,7 +44,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 		}
 		return feedback;
 	}
-	
+
 	@Transactional
 	private void updateAverageScore (Feedback feedback) throws BusinessException, UnknownHostException {
 		ServiceRequest<Feedback> request = new ServiceRequest<>();
@@ -63,15 +65,12 @@ public class FeedbackServiceImpl implements FeedbackService {
 			averageDAO.insert(average);
 		else
 			averageDAO.update(average, average.getId());
+		ratingService.recalculate(feedback.getUserReceivedId());
 	}
-	
+
 	@Transactional
 	public FeedbackAverage findAverageByUser(Long userId) throws BusinessException {
-		try {
-			return averageDAO.findByUser(userId);
-		} catch (UnknownHostException e) {
-			throw new BusinessException(e);
-		}
+		return averageDAO.findByUser(userId);
 	}
 
 	@Transactional
@@ -82,7 +81,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 			throw new BusinessException(e);
 		}
 	}
-	
-	
+
+
 
 }

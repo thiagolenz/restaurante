@@ -1,13 +1,12 @@
 package com.sacarona.service.impl;
 
-import java.net.UnknownHostException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sacarona.common.svc.exception.BusinessException;
 import com.sacarona.dao.UserDAO;
+import com.sacarona.dao.UserProfileDAO;
 import com.sacarona.model.mobile.AppUserAuth;
 import com.sacarona.model.user.User;
 import com.sacarona.service.AppUserAuthService;
@@ -22,16 +21,18 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private AppUserAuthService appUserAuthService;
 	
+	@Autowired
+	private UserProfileDAO userProfileDAO;
+	
 	@Transactional
 	public User findOrCreate (User user) throws BusinessException {
 		User userTemp;
-		try {
-			userTemp = userDAO.findBySocialMediaAndEmail(user);
-		} catch (UnknownHostException e) {
-			throw new BusinessException(e);
+		userTemp = userDAO.findBySocialMediaAndEmail(user);
+		if (userTemp == null){
+			userTemp = userProfileDAO.findBySocialMediaAndEmailSecondary(user);
+			if (userTemp == null)
+				return insert(user);
 		}
-		if (userTemp == null)
-			return insert(user);
 		return userTemp;
 	}
 
